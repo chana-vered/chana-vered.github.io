@@ -1,0 +1,19 @@
+# ── Jekyll settings — you don't need to touch this file ──────────────
+#
+# The words on the site live in content.yml. See EDITING.md.
+
+# Look for content.yml in this folder rather than a _data/ folder.
+data_dir: .
+
+exclude:
+  - CLAUDE.md
+  - EDITING.md
+  - README.md
+  - content.yml
+
+# Fail the build loudly if content.yml is missing something, instead of
+# silently publishing a page with a blank spot. If a build fails, GitHub sends
+# an email and the live site keeps showing the last good version.
+liquid:
+  strict_variables: true
+  strict_filters: true

@@ -1,0 +1,258 @@
+# ─────────────────────────────────────────────────────────────────────
+#  ALL THE WORDS ON THE WEBSITE
+#
+#  Change the text, then press the green "Commit changes" button.
+#  The website updates itself about a minute later.
+#
+#  Two rules:
+#    1. Leave the label and the  >-  alone. Only change the words
+#       on the indented lines underneath them.
+#    2. Keep those words indented (a few spaces in from the left).
+#
+#  You can write a long paragraph across several lines — they get
+#  joined together into one paragraph on the website.
+#
+#  Lines starting with # are notes to you. They never appear online.
+# ─────────────────────────────────────────────────────────────────────
+
+
+# ─── Browser tab & Google search result ──────────────────────────────
+site:
+  title: >-
+    Chana Vered — Torah Educator, Spiritual Mentor & Speaker
+
+  description: >-
+    Chana Vered weaves her love for ancient Jewish wisdom with meditation,
+    mental health and energy healing — offering practical tools for healing,
+    growth and transformation.
+
+  # The short description used when someone shares the site on WhatsApp,
+  # Facebook or X.
+  share_description: >-
+    Ancient wisdom, practical healing. Torah classes, meditation, private
+    mentorship, retreats and speaking with Chana Vered.
+
+
+# ─── The menu at the top ─────────────────────────────────────────────
+nav:
+  about: >-
+    About
+  teaching: >-
+    Teaching
+  speaking: >-
+    Speaking
+  button: >-
+    Invite Chana Vered
+
+
+# ─── The opening screen ──────────────────────────────────────────────
+hero:
+  eyebrow: >-
+    Torah Educator · Spiritual Mentor · Speaker
+
+  # The big headline. The second line is the one in colour.
+  title_line_1: >-
+    Ancient wisdom,
+  title_line_2: >-
+    practical healing.
+
+  intro: >-
+    Chana Vered weaves her love for ancient Jewish wisdom with meditation,
+    mental health and energy healing — offering practical tools for healing,
+    growth and transformation as we strive to thrive in today's rapidly
+    changing reality.
+
+  button_primary: >-
+    Invite Chana Vered to speak
+  button_secondary: >-
+    Meet Chana Vered
+
+
+# ─── The four small cards with big numbers ───────────────────────────
+#  To add another card, copy one whole block starting at "- number:".
+stats:
+  - number: >-
+      15+
+    text: >-
+      years teaching Torah to women around the world
+
+  - number: >-
+      1,000s
+    text: >-
+      students reached through classes, retreats and talks
+
+  - number: >-
+      3
+    text: >-
+      disciplines woven together: text, meditation, energy work
+
+  - number: >-
+      1:1
+    text: >-
+      mentorship for those ready to go deeper
+
+
+# ─── About ───────────────────────────────────────────────────────────
+about:
+  eyebrow: >-
+    About
+
+  heading: >-
+    A teacher who begins with the human being in front of her.
+
+  paragraph_1: >-
+    Chana Vered is a passionate Torah educator, spiritual mentor and
+    inspirational speaker. Her teaching starts where life actually happens —
+    in anxiety, in transition, in the ordinary weeks that ask more of us than
+    we thought we had.
+
+  paragraph_2: >-
+    Drawing on decades of Jewish thought alongside meditation, mental health
+    awareness and energy healing, she translates ideas that can feel abstract
+    into something you can use before the day is over. Her classes are warm,
+    unhurried and honest, and they leave people with tools rather than
+    inspiration alone.
+
+  paragraph_3: >-
+    She teaches internationally, mentors privately, and speaks to communities,
+    schools and organizations looking for depth without heaviness.
+
+  # The quote in the coloured box.
+  quote: >-
+    The wisdom was never meant to stay on the page. It was meant to change the
+    way you walk through your week.
+
+
+# ─── Teaching — the four cards ───────────────────────────────────────
+teaching:
+  eyebrow: >-
+    What Chana Vered offers
+
+  heading: >-
+    Four ways to learn together
+
+  intro: >-
+    Every format shares the same spine: real text, real inner work, and
+    something practical to carry home.
+
+  # To add another card, copy one whole block starting at "- title:".
+  cards:
+    - title: >-
+        Torah Classes
+      text: >-
+        Weekly text-based learning — Chassidut, parsha and Jewish thought —
+        taught for depth and for daily life.
+
+    - title: >-
+        Meditation & Inner Work
+      text: >-
+        Guided Jewish meditation and breath practice for quieting the noise and
+        hearing yourself again.
+
+    - title: >-
+        Private Mentorship
+      text: >-
+        One-to-one spiritual mentoring and energy healing for people navigating
+        a threshold season.
+
+    - title: >-
+        Retreats & Workshops
+      text: >-
+        Immersive days and weekends built around a single question worth
+        sitting with.
+
+
+# ─── Speaking ────────────────────────────────────────────────────────
+speaking:
+  eyebrow: >-
+    Speaking
+
+  heading: >-
+    Bring Chana Vered to your community
+
+  intro: >-
+    Chana Vered speaks at shuls, schools, women's events, conferences and
+    corporate wellness days — in person and online. Talks are shaped around
+    your audience, not delivered from a shelf.
+
+  # The list of talks. The title shows in bold, the description after it.
+  topics:
+    - title: >-
+        Thriving in Uncertainty
+      text: >-
+        ancient tools for a rapidly changing reality
+
+    - title: >-
+        The Mind, the Soul and the Body
+      text: >-
+        where mental health meets Jewish wisdom
+
+    - title: >-
+        Coming Home to Yourself
+      text: >-
+        meditation as a Jewish practice
+
+  # The big card on the right. Each line is shown on its own line.
+  feature_line_1: >-
+    Coming
+  feature_line_2: >-
+    Home to
+  feature_line_3: >-
+    Yourself
+  feature_caption: >-
+    meditation as a Jewish practice
+
+
+# ─── What people say ─────────────────────────────────────────────────
+#  These rotate one at a time.
+#  To add another, copy one whole block starting at "- quote:".
+testimonials:
+  eyebrow: >-
+    In their words
+
+  quotes:
+    - quote: >-
+        “I came for a class and left with a practice. Chana Vered makes the
+        deepest ideas feel usable.”
+      author: >-
+        Student, weekly Torah class
+
+    - quote: >-
+        “Our community is still talking about her talk months later. Warm,
+        sharp, and completely unpretentious.”
+      author: >-
+        Event organizer
+
+    - quote: >-
+        “Mentoring with Chana Vered was the first time healing work and Torah
+        felt like the same conversation.”
+      author: >-
+        Private mentorship client
+
+
+# ─── Get in touch (the dark section at the bottom) ───────────────────
+contact:
+  # The big heading. The second line is the one in colour.
+  heading_line_1: >-
+    Let's find the right thing
+  heading_line_2: >-
+    for your people.
+
+  intro: >-
+    For speaking inquiries, class schedules, retreats or private mentorship —
+    send a note and Chana Vered will get back to you personally.
+
+  # Change this in one place and it updates everywhere on the site.
+  email: >-
+    hello@chanavered.com
+
+  back_to_top: >-
+    Back to top
+
+
+# ─── The very bottom of the page ─────────────────────────────────────
+footer:
+  line: >-
+    © 2026 · Torah educator, spiritual mentor & speaker
+  email_label: >-
+    Email
