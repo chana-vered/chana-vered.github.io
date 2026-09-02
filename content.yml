@@ -41,6 +41,8 @@ nav:
     Teaching
   speaking: >-
     Speaking
+  projects: >-
+    Projects
   button: >-
     Invite Chana Vered
 
@@ -116,6 +118,16 @@ about:
   paragraph_3: >-
     She teaches internationally, mentors privately, and speaks to communities,
     schools and organizations looking for depth without heaviness.
+
+  # One phrase from each paragraph, copied exactly as it appears above. It blooms
+  # large behind the paragraph as that part is read. Keep all three lines, even
+  # if you change the words.
+  paragraph_1_highlight: >-
+    in the ordinary weeks that ask more of us than we thought we had
+  paragraph_2_highlight: >-
+    tools rather than inspiration alone
+  paragraph_3_highlight: >-
+    depth without heaviness
 
   # The quote in the coloured box.
   quote: >-
@@ -203,8 +215,41 @@ speaking:
     meditation as a Jewish practice
 
 
+# ─── Projects ────────────────────────────────────────────────────────
+projects:
+  eyebrow: >-
+    Projects
+
+  heading: >-
+    Where the learning keeps going
+
+  intro: >-
+    Alongside teaching and speaking, Chana Vered builds places for this
+    wisdom to live online.
+
+  # To add another project, copy a whole block starting at "- name:".
+  # Every project needs all six lines below — including logo. For the logo,
+  # ask Hillel to add the image file first, then put its name here.
+  items:
+    - name: >-
+        Geu.la
+      logo: >-
+        assets/geula.png
+      tagline: >-
+        Geula: Revealing A Divine World
+      heading: >-
+        A directory of universal Torah resources
+      description: >-
+        Articles and videos gathered into one place you can search, filter
+        and browse.
+      link: >-
+        https://geu.la/
+      link_label: >-
+        Visit geu.la
+
+
 # ─── What people say ─────────────────────────────────────────────────
-#  These rotate one at a time.
+#  These appear one after another as the visitor scrolls, each spoken word by word.
 #  To add another, copy one whole block starting at "- quote:".
 testimonials:
   eyebrow: >-
