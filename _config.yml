@@ -1,0 +1,18 @@
+# Minimal Jekyll config. GitHub Pages builds this site automatically;
+# there is nothing to install or run.
+#
+# The words on the site live in _data/content.yml — see EDITING.md.
+
+exclude:
+  - CLAUDE.md
+  - EDITING.md
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+
+# Fail the build loudly if the content file is missing something, instead of
+# silently publishing a page with a blank spot. If a build fails, GitHub sends
+# an email and the live site keeps showing the last good version.
+liquid:
+  strict_variables: true
+  strict_filters: true

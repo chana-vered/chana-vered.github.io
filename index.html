@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
@@ -5,18 +7,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#fbf9fb">
 
-<title>Chana Vered — Torah Educator, Spiritual Mentor &amp; Speaker</title>
-<meta name="description" content="Chana Vered weaves her love for ancient Jewish wisdom with meditation, mental health and energy healing — offering practical tools for healing, growth and transformation." />
+<title>{{ site.data.content.site.title | escape }}</title>
+<meta name="description" content="{{ site.data.content.site.description | escape }}" />
 
 <link rel="icon" href="assets/logo.png" />
 <link rel="preload" as="image" href="assets/logo.png" fetchpriority="high" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Chana Vered — Torah Educator, Spiritual Mentor &amp; Speaker" />
-<meta property="og:description" content="Ancient wisdom, practical healing. Torah classes, meditation, private mentorship, retreats and speaking with Chana Vered." />
+<meta property="og:title" content="{{ site.data.content.site.title | escape }}" />
+<meta property="og:description" content="{{ site.data.content.site.share_description | escape }}" />
 <meta property="og:image" content="assets/logo.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Chana Vered — Torah Educator, Spiritual Mentor &amp; Speaker" />
-<meta name="twitter:description" content="Ancient wisdom, practical healing. Torah classes, meditation, private mentorship, retreats and speaking with Chana Vered." />
+<meta name="twitter:title" content="{{ site.data.content.site.title | escape }}" />
+<meta name="twitter:description" content="{{ site.data.content.site.share_description | escape }}" />
 <meta name="twitter:image" content="assets/logo.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -167,7 +169,7 @@ p { margin: 0; }
 .card { position: relative; padding: 34px 30px 36px; border-radius: 22px; border: 1px solid transparent; background: linear-gradient(#fff, #fff) padding-box, linear-gradient(120deg, var(--hair), var(--hair)) border-box; transition: transform .5s var(--ease), box-shadow .5s var(--ease), background .4s ease; }
 .card h3 { margin: 24px 0 12px; }
 .card p { font-size: 15px; line-height: 1.65; color: var(--ink-3); }
-.icon { position: relative; width: 48px; height: 48px; border-radius: 14px; }
+.icon { position: relative; background: linear-gradient(140deg, var(--rose), var(--violet)); width: 48px; height: 48px; border-radius: 14px; }
 .icon::before { content: ""; position: absolute; inset: 6px; border-radius: inherit; background: inherit; filter: blur(18px); opacity: .6; z-index: -1; }
 .i1 { background: linear-gradient(140deg, oklch(0.66 0.23 345), oklch(0.72 0.16 320)); }
 .i2 { background: linear-gradient(140deg, oklch(0.64 0.2 300), oklch(0.7 0.15 285)); }
@@ -182,13 +184,16 @@ p { margin: 0; }
 .topic { position: relative; display: flex; gap: 16px; align-items: baseline; padding: 16px 0; }
 .topic::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--hair); transform: scaleX(0); transform-origin: left; transition: transform 1s var(--ease); transition-delay: var(--delay, 0ms); }
 .topic:last-child::after { display: none; }
-.topic .dot { flex: none; width: 7px; height: 7px; border-radius: 50%; transform: translateY(-2px) scale(0); transition: transform .7s var(--ease); transition-delay: calc(var(--delay, 0ms) + 200ms); }
+.topic .dot { flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--rose); transform: translateY(-2px) scale(0); transition: transform .7s var(--ease); transition-delay: calc(var(--delay, 0ms) + 200ms); }
 .topic p { font-size: 16px; line-height: 1.55; color: #4a4352; opacity: 0; translate: 0 10px; transition: opacity .8s var(--ease), translate .8s var(--ease); transition-delay: calc(var(--delay, 0ms) + 120ms); }
 .topic p strong { font-weight: 600; color: var(--ink); }
 .topic.in::after { transform: scaleX(1); }
 .topic.in .dot { transform: translateY(-2px) scale(1); }
 .topic.in p { opacity: 1; translate: none; }
 .no-js .topic::after { transform: none; } .no-js .topic .dot { transform: translateY(-2px); } .no-js .topic p { opacity: 1; translate: none; }
+.dot-1 { background: oklch(0.64 0.22 345); }
+.dot-2 { background: oklch(0.64 0.19 295); }
+.dot-3 { background: oklch(0.68 0.14 220); }
 .talk { position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: min(78vh, 640px); padding: clamp(28px, 4vw, 48px); border-radius: 24px; background: linear-gradient(160deg, #fff, oklch(0.975 0.015 320)); border: 1px solid var(--hair); box-shadow: 0 40px 80px -50px rgba(28, 23, 36, .35); overflow: hidden; }
 .talk-title { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(48px, 6.8vw, 104px); line-height: .95; letter-spacing: -.02em; }
 .talk-title .line { display: block; }
@@ -303,10 +308,10 @@ p { margin: 0; }
     <img src="assets/logo.png" alt="Chana Vered" width="1600" height="484" />
   </a>
   <nav class="nav" aria-label="Primary">
-    <a href="#about">About</a>
-    <a href="#work">Teaching</a>
-    <a href="#speaking">Speaking</a>
-    <a class="btn btn-grad" href="#contact">Invite Chana Vered</a>
+    <a href="#about">{{ site.data.content.nav.about | escape }}</a>
+    <a href="#work">{{ site.data.content.nav.teaching | escape }}</a>
+    <a href="#speaking">{{ site.data.content.nav.speaking | escape }}</a>
+    <a class="btn btn-grad" href="#contact">{{ site.data.content.nav.button | escape }}</a>
   </nav>
   <span class="bsd" lang="he" dir="rtl">בס"ד</span>
 </header>
@@ -328,17 +333,17 @@ p { margin: 0; }
         </div>
       </div>
 
-      <p class="eyebrow hero-eyebrow reveal" style="--delay: 80ms">Torah Educator · Spiritual Mentor · Speaker</p>
+      <p class="eyebrow hero-eyebrow reveal" style="--delay: 80ms">{{ site.data.content.hero.eyebrow | escape }}</p>
       <h1>
-        <span class="sr-only">Ancient wisdom, practical healing.</span>
-        <span class="h1-vis" aria-hidden="true">Ancient wisdom,<br /><em class="grad">practical healing.</em></span>
+        <span class="sr-only">{{ site.data.content.hero.title_line_1 | escape }} {{ site.data.content.hero.title_line_2 | escape }}</span>
+        <span class="h1-vis" aria-hidden="true">{{ site.data.content.hero.title_line_1 | escape }}<br /><em class="grad">{{ site.data.content.hero.title_line_2 | escape }}</em></span>
       </h1>
 
       <div class="hero-bottom">
-        <p class="lede reveal" style="--delay: 520ms">Chana Vered weaves her love for ancient Jewish wisdom with meditation, mental health and energy healing — offering practical tools for healing, growth and transformation as we strive to thrive in today's rapidly changing reality.</p>
+        <p class="lede reveal" style="--delay: 520ms">{{ site.data.content.hero.intro | escape }}</p>
         <div class="hero-cta reveal" style="--delay: 640ms">
-          <a class="btn btn-grad" href="#contact">Invite Chana Vered to speak</a>
-          <a class="btn btn-ghost" href="#about">Meet Chana Vered</a>
+          <a class="btn btn-grad" href="#contact">{{ site.data.content.hero.button_primary | escape }}</a>
+          <a class="btn btn-ghost" href="#about">{{ site.data.content.hero.button_secondary | escape }}</a>
         </div>
       </div>
     </div>
@@ -349,10 +354,9 @@ p { margin: 0; }
 
   <div class="wrap">
     <div class="stats">
-      <div class="stat reveal" style="--delay: 0ms"><strong class="grad">15+</strong><p>years teaching Torah to women around the world</p></div>
-      <div class="stat reveal" style="--delay: 80ms"><strong class="grad">1,000s</strong><p>students reached through classes, retreats and talks</p></div>
-      <div class="stat reveal" style="--delay: 160ms"><strong class="grad">3</strong><p>disciplines woven together: text, meditation, energy work</p></div>
-      <div class="stat reveal" style="--delay: 240ms"><strong class="grad">1:1</strong><p>mentorship for those ready to go deeper</p></div>
+      {%- for stat in site.data.content.stats %}
+      <div class="stat reveal" style="--delay: {{ forloop.index0 | times: 80 }}ms"><strong class="grad">{{ stat.number | escape }}</strong><p>{{ stat.text | escape }}</p></div>
+      {%- endfor %}
     </div>
   </div>
 
@@ -362,15 +366,15 @@ p { margin: 0; }
     <img class="watermark" src="assets/logo.png" alt="" aria-hidden="true" data-speed=".25" width="1600" height="484" />
     <div class="wrap">
       <div class="about-head reveal reveal-fade">
-        <p class="eyebrow">About</p>
-        <h2>A teacher who begins with the human being in front of her.</h2>
+        <p class="eyebrow">{{ site.data.content.about.eyebrow | escape }}</p>
+        <h2>{{ site.data.content.about.heading | escape }}</h2>
       </div>
       <div class="about-body reveal reveal-fade" style="--delay: 150ms">
-        <p>Chana Vered is a passionate Torah educator, spiritual mentor and inspirational speaker. Her teaching starts where life actually happens — in anxiety, in transition, in the ordinary weeks that ask more of us than we thought we had.</p>
-        <p>Drawing on decades of Jewish thought alongside meditation, mental health awareness and energy healing, she translates ideas that can feel abstract into something you can use before the day is over. Her classes are warm, unhurried and honest, and they leave people with tools rather than inspiration alone.</p>
-        <p>She teaches internationally, mentors privately, and speaks to communities, schools and organizations looking for depth without heaviness.</p>
+        <p>{{ site.data.content.about.paragraph_1 | escape }}</p>
+        <p>{{ site.data.content.about.paragraph_2 | escape }}</p>
+        <p>{{ site.data.content.about.paragraph_3 | escape }}</p>
         <div class="pull">
-          <p>The wisdom was never meant to stay on the page. It was meant to change the way you walk through your week.</p>
+          <p>{{ site.data.content.about.quote | escape }}</p>
         </div>
       </div>
     </div>
@@ -380,32 +384,19 @@ p { margin: 0; }
     <div class="wrap">
       <div class="work-head">
         <div class="reveal">
-          <p class="eyebrow">What Chana Vered offers</p>
-          <h2 style="margin-top: 18px">Four ways to learn together</h2>
+          <p class="eyebrow">{{ site.data.content.teaching.eyebrow | escape }}</p>
+          <h2 style="margin-top: 18px">{{ site.data.content.teaching.heading | escape }}</h2>
         </div>
-        <p class="reveal" style="--delay: 120ms">Every format shares the same spine: real text, real inner work, and something practical to carry home.</p>
+        <p class="reveal" style="--delay: 120ms">{{ site.data.content.teaching.intro | escape }}</p>
       </div>
       <div class="cards">
-        <article class="card reveal reveal-rot" style="--delay: 0ms">
-          <div class="icon i1" aria-hidden="true"></div>
-          <h3>Torah Classes</h3>
-          <p>Weekly text-based learning — Chassidut, parsha and Jewish thought — taught for depth and for daily life.</p>
+        {%- for card in site.data.content.teaching.cards %}
+        <article class="card reveal reveal-rot" style="--delay: {{ forloop.index0 | times: 100 }}ms">
+          <div class="icon i{{ forloop.index }}" aria-hidden="true"></div>
+          <h3>{{ card.title | escape }}</h3>
+          <p>{{ card.text | escape }}</p>
         </article>
-        <article class="card reveal reveal-rot" style="--delay: 100ms">
-          <div class="icon i2" aria-hidden="true"></div>
-          <h3>Meditation &amp; Inner Work</h3>
-          <p>Guided Jewish meditation and breath practice for quieting the noise and hearing yourself again.</p>
-        </article>
-        <article class="card reveal reveal-rot" style="--delay: 200ms">
-          <div class="icon i3" aria-hidden="true"></div>
-          <h3>Private Mentorship</h3>
-          <p>One-to-one spiritual mentoring and energy healing for people navigating a threshold season.</p>
-        </article>
-        <article class="card reveal reveal-rot" style="--delay: 300ms">
-          <div class="icon i4" aria-hidden="true"></div>
-          <h3>Retreats &amp; Workshops</h3>
-          <p>Immersive days and weekends built around a single question worth sitting with.</p>
-        </article>
+        {%- endfor %}
       </div>
     </div>
   </section>
@@ -414,47 +405,41 @@ p { margin: 0; }
     <div class="wrap">
       <div>
         <div class="reveal">
-          <p class="eyebrow">Speaking</p>
-          <h2>Bring Chana Vered to your community</h2>
-          <p class="lede">Chana Vered speaks at shuls, schools, women's events, conferences and corporate wellness days — in person and online. Talks are shaped around your audience, not delivered from a shelf.</p>
+          <p class="eyebrow">{{ site.data.content.speaking.eyebrow | escape }}</p>
+          <h2>{{ site.data.content.speaking.heading | escape }}</h2>
+          <p class="lede">{{ site.data.content.speaking.intro | escape }}</p>
         </div>
         <div class="topics">
-          <div class="topic" style="--delay: 0ms"><span class="dot" style="background: oklch(0.64 0.22 345)"></span><p><strong>Thriving in Uncertainty</strong> — ancient tools for a rapidly changing reality</p></div>
-          <div class="topic" style="--delay: 120ms"><span class="dot" style="background: oklch(0.64 0.19 295)"></span><p><strong>The Mind, the Soul and the Body</strong> — where mental health meets Jewish wisdom</p></div>
-          <div class="topic" style="--delay: 240ms"><span class="dot" style="background: oklch(0.68 0.14 220)"></span><p><strong>Coming Home to Yourself</strong> — meditation as a Jewish practice</p></div>
+          {%- for topic in site.data.content.speaking.topics %}
+          <div class="topic" style="--delay: {{ forloop.index0 | times: 120 }}ms"><span class="dot dot-{{ forloop.index }}"></span><p><strong>{{ topic.title | escape }}</strong> — {{ topic.text | escape }}</p></div>
+          {%- endfor %}
         </div>
       </div>
       <!-- TODO: swap this typographic card for a real speaking photo when one is available. -->
       <div class="talk reveal" style="--delay: 160ms">
-        <p class="talk-title grad" aria-label="Coming Home to Yourself"><span class="line reveal" style="--delay: 360ms">Coming</span><span class="line reveal" style="--delay: 480ms">Home to</span><span class="line reveal" style="--delay: 600ms">Yourself</span></p>
-        <p class="talk-label reveal" style="--delay: 760ms">meditation as a Jewish practice</p>
+        <p class="talk-title grad" aria-label="{{ site.data.content.speaking.feature_line_1 | escape }} {{ site.data.content.speaking.feature_line_2 | escape }} {{ site.data.content.speaking.feature_line_3 | escape }}"><span class="line reveal" style="--delay: 360ms">{{ site.data.content.speaking.feature_line_1 | escape }}</span><span class="line reveal" style="--delay: 480ms">{{ site.data.content.speaking.feature_line_2 | escape }}</span><span class="line reveal" style="--delay: 600ms">{{ site.data.content.speaking.feature_line_3 | escape }}</span></p>
+        <p class="talk-label reveal" style="--delay: 760ms">{{ site.data.content.speaking.feature_caption | escape }}</p>
       </div>
     </div>
   </section>
 
   <section id="voices" class="section voices" aria-labelledby="voices-label">
     <div class="wrap">
-      <p id="voices-label" class="eyebrow reveal">In their words</p>
+      <p id="voices-label" class="eyebrow reveal">{{ site.data.content.testimonials.eyebrow | escape }}</p>
       <div class="stage reveal" style="--delay: 120ms" aria-live="polite">
-        <figure class="quote is-active">
-          <p>“I came for a class and left with a practice. Chana Vered makes the deepest ideas feel usable.”</p>
-          <figcaption>Student, weekly Torah class</figcaption>
+        {%- for item in site.data.content.testimonials.quotes %}
+        <figure class="quote{% if forloop.first %} is-active{% endif %}">
+          <p>{{ item.quote | escape }}</p>
+          <figcaption>{{ item.author | escape }}</figcaption>
         </figure>
-        <figure class="quote">
-          <p>“Our community is still talking about her talk months later. Warm, sharp, and completely unpretentious.”</p>
-          <figcaption>Event organizer</figcaption>
-        </figure>
-        <figure class="quote">
-          <p>“Mentoring with Chana Vered was the first time healing work and Torah felt like the same conversation.”</p>
-          <figcaption>Private mentorship client</figcaption>
-        </figure>
+        {%- endfor %}
       </div>
       <div class="voice-nav reveal" style="--delay: 240ms">
         <button class="arrow" type="button" data-dir="-1" aria-label="Previous quote">‹</button>
         <div class="dots" role="group" aria-label="Choose a quote">
-          <button type="button" data-go="0" aria-label="Quote 1" aria-current="true"></button>
-          <button type="button" data-go="1" aria-label="Quote 2"></button>
-          <button type="button" data-go="2" aria-label="Quote 3"></button>
+          {%- for item in site.data.content.testimonials.quotes %}
+          <button type="button" data-go="{{ forloop.index0 }}" aria-label="Quote {{ forloop.index }}"{% if forloop.first %} aria-current="true"{% endif %}></button>
+          {%- endfor %}
         </div>
         <button class="arrow" type="button" data-dir="1" aria-label="Next quote">›</button>
       </div>
@@ -465,13 +450,11 @@ p { margin: 0; }
     <div class="horizon" aria-hidden="true"></div>
     <div class="candle" aria-hidden="true"></div>
     <div class="wrap">
-      <h2 class="reveal">Let's find the right thing<br /><em>for your people.</em></h2>
-      <p class="lede reveal" style="--delay: 120ms">For speaking inquiries, class schedules, retreats or private mentorship — send a note and Chana Vered will get back to you personally.</p>
+      <h2 class="reveal">{{ site.data.content.contact.heading_line_1 | escape }}<br /><em>{{ site.data.content.contact.heading_line_2 | escape }}</em></h2>
+      <p class="lede reveal" style="--delay: 120ms">{{ site.data.content.contact.intro | escape }}</p>
       <div class="contact-cta reveal" style="--delay: 240ms">
-        <!-- TODO: confirm the real contact address. Placeholder from the design: hello@chanavered.com
-             It also appears once more in the footer below — update both. -->
-        <a class="btn btn-light" href="mailto:hello@chanavered.com">hello@chanavered.com</a>
-        <a class="btn btn-ghost-dark" href="#top">Back to top</a>
+        <a class="btn btn-light" href="mailto:{{ site.data.content.contact.email | escape }}">{{ site.data.content.contact.email | escape }}</a>
+        <a class="btn btn-ghost-dark" href="#top">{{ site.data.content.contact.back_to_top | escape }}</a>
       </div>
     </div>
   </section>
@@ -480,12 +463,12 @@ p { margin: 0; }
 <footer class="footer">
   <div class="wrap">
     <img src="assets/logo.png" alt="Chana Vered" width="1600" height="484" />
-    <p>© 2026 · Torah educator, spiritual mentor &amp; speaker</p>
+    <p>{{ site.data.content.footer.line | escape }}</p>
     <nav aria-label="Footer">
-      <a href="#about">About</a>
-      <a href="#work">Teaching</a>
-      <a href="#speaking">Speaking</a>
-      <a href="mailto:hello@chanavered.com">Email</a>
+      <a href="#about">{{ site.data.content.nav.about | escape }}</a>
+      <a href="#work">{{ site.data.content.nav.teaching | escape }}</a>
+      <a href="#speaking">{{ site.data.content.nav.speaking | escape }}</a>
+      <a href="mailto:{{ site.data.content.contact.email | escape }}">{{ site.data.content.footer.email_label | escape }}</a>
     </nav>
   </div>
 </footer>
