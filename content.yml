@@ -119,6 +119,16 @@ about:
     She teaches internationally, mentors privately, and speaks to communities,
     schools and organizations looking for depth without heaviness.
 
+  # One phrase from each paragraph, copied exactly as it appears above. It blooms
+  # large behind the paragraph as that part is read. Keep all three lines, even
+  # if you change the words.
+  paragraph_1_highlight: >-
+    in the ordinary weeks that ask more of us than we thought we had
+  paragraph_2_highlight: >-
+    tools rather than inspiration alone
+  paragraph_3_highlight: >-
+    depth without heaviness
+
   # The quote in the coloured box.
   quote: >-
     The wisdom was never meant to stay on the page. It was meant to change the

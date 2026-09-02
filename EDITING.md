@@ -62,7 +62,7 @@ The file is in the same order as the page, top to bottom:
 | `nav` | The menu at the top |
 | `hero` | The opening screen: the tagline, the big headline, the buttons |
 | `stats` | The four small cards with the big numbers |
-| `about` | The About section and the quote in the coloured box |
+| `about` | The About section — three paragraphs, a highlight phrase for each (copied from the paragraph; it appears large behind it), and the quote |
 | `teaching` | "Four ways to learn together" and its four cards |
 | `speaking` | The speaking section, your talk topics, and the big card on the right |
 | `projects` | The Projects section — each project has a logo, tagline, headline, description and link |

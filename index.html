@@ -190,19 +190,33 @@ html.is-pinned .stage > .wrap { width: 100%; }
 /* a soft highlight crossing the stage during the hold (Teaching and Speaking only) */
 .glow { position: absolute; left: 50%; top: 50%; width: 120vw; height: 120vh; margin: -60vh 0 0 -60vw; border-radius: 50%; background: radial-gradient(ellipse at center, oklch(0.99 0.02 330 / .9), oklch(0.98 0.02 300 / .35) 30%, transparent 62%); pointer-events: none; z-index: 0; will-change: transform; transform: translate3d(calc((.5 - var(--pw, .5)) * -40vw), calc((.5 - var(--pw, .5)) * 30vh), 0); }
 
-/* about — noon. Paragraphs are read along at phrase level; the heading drifts least. */
+/* about — noon. The statement opens alone, then shrinks into a running title while each
+   paragraph takes the stage as a page in big type, read phrase by phrase (the words of a
+   phrase rise and ink together); a key phrase from each paragraph blooms large behind it.
+   In flow mode the pages stack and each bloom becomes a subhead above its paragraph. */
 .about .stage { background: rgba(255, 255, 255, .9); border-block: 1px solid var(--hair); }
-.about-grid { display: grid; grid-template-columns: 1fr; gap: clamp(32px, 6vw, 96px); align-items: start; position: relative; z-index: 1; }
-.about-head { transform: translate3d(0, calc((.5 - var(--pm, .5)) * 10px * (1 - var(--qd, 0))), 0); }
+.about-pages { z-index: 1; } /* not positioned: the heading's corner slot must resolve against the stage */
 .about-head h2 { margin-top: 18px; }
-.about-body { display: grid; gap: 32px; font-size: clamp(17px, 1.2vw, 18px); line-height: 1.7; color: var(--ink-2); max-width: 30em; }
-.about-body p { text-wrap: pretty; --k: 16px; }
-.about-body p[data-item] { opacity: 1; }
-.ph { opacity: calc(.25 + .75 * clamp(0, calc(var(--q, 1) * var(--n, 1) - var(--i, 0)), 1)); }
+.about-body { display: grid; gap: clamp(40px, 6vh, 72px); margin-top: clamp(32px, 5vh, 56px); }
+.page { --k: 14px; position: relative; }
+.page-text { position: relative; z-index: 1; font-family: var(--serif); font-weight: 300; font-size: clamp(20px, 5vw, 24px); line-height: 1.4; color: var(--ink); text-wrap: pretty; }
+.wd2 { display: inline-block; --fq: clamp(0, calc(var(--q, 1) * var(--m, 1) - var(--j, 0)), 1); opacity: calc(.15 + .85 * var(--fq)); transform: translate3d(0, calc((1 - var(--fq)) * .45em), 0); }
+.bloom-wrap { margin-bottom: 14px; }
+.bloom { margin: 0; font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(22px, 3vw, 30px); line-height: 1.1; letter-spacing: -.01em; background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+/* pinned: the heading is laid out at its corner slot and translated to the centre while nothing
+   has arrived yet (--cx/--cy measured once by JS); the pages stack in one cell and take turns */
+html.is-pinned .about-head .eyebrow { opacity: calc(1 - var(--qnext, 0)); }
+html.is-pinned .about-head { position: absolute; top: 110px; left: max(var(--gutter), calc((100% - var(--wrap)) / 2)); width: min(62vw, calc(13 * clamp(40px, 5vw, 76px))); transform-origin: top left; transform: translate3d(calc(var(--cx, 0px) * (1 - var(--qnext, 0))), calc(var(--cy, 0px) * (1 - var(--qnext, 0)) + (.5 - var(--pm, .5)) * 6px), 0) scale(calc(1 - .58 * var(--qnext, 0))); }
+html.is-pinned .about-body { margin: 0 auto; width: 100%; max-width: 30em; font-size: clamp(22px, 2.5vw, 36px); }
+html.is-pinned .page { grid-area: 1 / 1; pointer-events: none; }
+html.is-pinned .page[data-item] { opacity: calc(var(--q, 1) * (1 - var(--qnext, 0))); --rise: calc((1 - var(--q, 1)) * 40px - var(--qnext, 0) * 40px); }
+html.is-pinned .page-text { font-size: 1em; line-height: 1.35; text-align: center; max-width: 24em; margin: 0 auto; }
+html.is-pinned .bloom-wrap { position: absolute; right: -6vw; bottom: -12vh; margin: 0; width: 14em; font-size: clamp(40px, 6vw, 92px); --fq: clamp(0, calc(var(--q, 1) * var(--m, 1) - var(--jh, 0)), 1); opacity: calc(.18 * var(--fq) * (1 - var(--qnext, 0))); transform: translate3d(calc((.5 - var(--pw, .5)) * 60px), calc((.5 - var(--pw, .5)) * -40px), 0) scale(calc(.96 + .04 * var(--fq))); pointer-events: none; z-index: 0; text-align: right; }
+html.is-pinned .bloom { font-size: inherit; line-height: 1; letter-spacing: -.02em; }
+html.is-pinned .about-pages { opacity: calc(1 - min(var(--qd, 0) * 2, 1)); }
 .pull { position: relative; margin-top: 12px; padding: 34px 32px 30px; border-radius: 20px; background: linear-gradient(120deg, oklch(0.96 0.03 330), oklch(0.96 0.03 240)); border: 1px solid rgba(28, 23, 36, .06); }
 .pull::before { content: "\201C"; position: absolute; top: -34px; left: 14px; font-family: var(--serif); font-size: 160px; line-height: 1; color: oklch(0.66 0.23 350 / .12); pointer-events: none; }
 .pull p { position: relative; font-family: var(--serif); font-style: italic; font-size: clamp(22px, 2vw, 28px); line-height: 1.35; color: #3b3342; clip-path: inset(-.1em calc((1 - var(--q, 1)) * 100%) -.3em -.1em); }
-html.is-pinned .about-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); opacity: calc(1 - min(var(--qd, 0) * 2, 1)); }
 /* The climax: the quote leaves its box and is inked across the whole page by the scroll,
    then the signature fades up beneath it — a signed page. (--qd defaults to 0 here: pin-only.) */
 .signed { position: absolute; inset: 0; display: grid; place-items: center; padding: 120px var(--gutter) 90px; pointer-events: none; z-index: 2; }
@@ -324,7 +338,6 @@ html.is-pinned .night::before { content: ""; position: absolute; left: 0; right:
 .no-js #intro { display: none; }
 
 /* ───────────────────────────── 6. width queries ───────────────────────────── */
-@media (min-width: 961px) { .about-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); } }
 @media (max-width: 1100px) { .thread { display: none; } }
 @media (max-width: 860px) {
   .project { grid-template-columns: 1fr; justify-items: start; }
@@ -378,7 +391,8 @@ html.is-pinned .night::before { content: ""; position: absolute; left: 0; right:
   .blob, .portrait-ring, .cue::after, .candle { animation: none !important; }
   .depth { translate: none !important; }
   .card, .btn { transition: none !important; }
-  .sky-ramp, .glow, .ring-turn, .aurora, .about-head, .speaking-head, .talk, .icon, .project-mark, .project-body, .project-mark img, .cards, .stage-quotes { transform: none !important; }
+  .sky-ramp, .glow, .ring-turn, .aurora, .about-head, .page, .wd2, .bloom-wrap, .speaking-head, .talk, .icon, .project-mark, .project-body, .project-mark img, .cards, .stage-quotes { transform: none !important; }
+  .wd2, .bloom-wrap, .page, .about-pages { opacity: 1 !important; }
   .hero h1, .hero-logo, .portrait-exit, .hero-bg { transform: none !important; opacity: 1 !important; }
   [data-item], .quote[data-item], .wd, .ph, .quote figcaption, .candle-wrap, .night-content, .night, .night h2 em, .stat, .stat p { opacity: 1 !important; transform: none !important; }
   .pull p, .name, .big-quote, .card, .project-mark, .talk-title .line, .stat strong { clip-path: none !important; }
@@ -468,15 +482,24 @@ html.is-pinned .night::before { content: ""; position: absolute; left: 0; right:
 
   <section id="about" class="chapter about" data-pin data-extend="2">
     <div class="stage">
-      <div class="wrap about-grid">
-        <div class="about-head reveal reveal-fade">
+      <div class="wrap about-pages">
+        <div class="about-head reveal reveal-fade" data-item="0" data-panel>
           <p class="eyebrow">{{ site.data.content.about.eyebrow | escape }}</p>
           <h2>{{ site.data.content.about.heading | escape }}</h2>
         </div>
         <div class="about-body">
-          <p data-item data-phrases>{{ site.data.content.about.paragraph_1 | escape }}</p>
-          <p data-item data-phrases>{{ site.data.content.about.paragraph_2 | escape }}</p>
-          <p data-item data-phrases>{{ site.data.content.about.paragraph_3 | escape }}</p>
+          <div class="page" data-item="1" data-panel>
+            <div class="bloom-wrap" aria-hidden="true"><p class="bloom">{{ site.data.content.about.paragraph_1_highlight | escape }}</p></div>
+            <p class="page-text" data-phrases data-highlight="{{ site.data.content.about.paragraph_1_highlight | escape }}">{{ site.data.content.about.paragraph_1 | escape }}</p>
+          </div>
+          <div class="page" data-item="2" data-panel>
+            <div class="bloom-wrap" aria-hidden="true"><p class="bloom">{{ site.data.content.about.paragraph_2_highlight | escape }}</p></div>
+            <p class="page-text" data-phrases data-highlight="{{ site.data.content.about.paragraph_2_highlight | escape }}">{{ site.data.content.about.paragraph_2 | escape }}</p>
+          </div>
+          <div class="page" data-item="3" data-panel>
+            <div class="bloom-wrap" aria-hidden="true"><p class="bloom">{{ site.data.content.about.paragraph_3_highlight | escape }}</p></div>
+            <p class="page-text" data-phrases data-highlight="{{ site.data.content.about.paragraph_3_highlight | escape }}">{{ site.data.content.about.paragraph_3 | escape }}</p>
+          </div>
           <div class="flow-only">
             <div class="pull" data-item>
               <p>{{ site.data.content.about.quote | escape }}</p>
@@ -578,7 +601,7 @@ html.is-pinned .night::before { content: ""; position: absolute; left: 0; right:
         <p id="voices-label" class="eyebrow reveal">{{ site.data.content.testimonials.eyebrow | escape }}</p>
         <div class="stage-quotes">
           {%- for item in site.data.content.testimonials.quotes %}
-          <figure class="quote" data-item>
+          <figure class="quote" data-item data-panel>
             <p>{{ item.quote | escape }}</p>
             <figcaption>{{ item.author | escape }}</figcaption>
           </figure>
@@ -815,6 +838,13 @@ html.is-pinned .night::before { content: ""; position: absolute; left: 0; right:
     thread.style.height = `${threadH}px`;
     // the #contact anchor lands where night is fully in
     if (voices && marker) marker.style.top = `${pinned ? voices.range * ((voices.n + 1) / voices.steps) : offsetTop(night) - voices.top}px`;
+    // the About heading: from its corner slot to the centre of the stage (measured once, no reads per frame)
+    const head = $('.about-head');
+    if (head && pinned && head.offsetParent) {
+      const st = head.offsetParent;
+      head.style.setProperty('--cx', `${(st.clientWidth - head.offsetWidth) / 2 - head.offsetLeft}px`);
+      head.style.setProperty('--cy', `${(st.clientHeight - head.offsetHeight) / 2 - head.offsetTop}px`);
+    }
     snapNext = true;
     dirty = true;
   };
@@ -876,10 +906,11 @@ html.is-pinned .night::before { content: ""; position: absolute; left: 0; right:
         it.q = it.k === 0 ? 1 : clamp((p - it.k / c.steps) / (0.6 / c.steps), 0, 1);
         setVar(it.rec, it.el, '--q', it.q);
       });
-      // a voice settles back as the next one speaks
+      // panels take turns: each one knows how far the next has arrived (voices settle back,
+      // About pages lift away, the About heading shrinks into its corner)
       c.items.forEach((it) => {
-        if (!it.el.classList.contains('quote')) return;
-        const nx = c.items.find((o) => o.k === it.k + 1 && o.el.classList.contains('quote'));
+        if (!it.el.hasAttribute('data-panel')) return;
+        const nx = c.items.find((o) => o.k === it.k + 1 && o.el.hasAttribute('data-panel'));
         setVar(it.rec, it.el, '--qnext', nx ? nx.q : 0);
       });
       // beats after the items: dusk (--qd, read tier; --qw, wash tier) and the name (--qn)
@@ -1078,10 +1109,29 @@ html.is-pinned .night::before { content: ""; position: absolute; left: 0; right:
     p.replaceChildren(...nodes);
   };
   $$('.quote p').forEach((p) => wrapUnits(p, p.textContent.trim().split(/\s+/), 'wd'));
+  // About pages: words grouped by phrase (--j) so a phrase rises and inks as a unit while
+  // still wrapping word by word; the bloom learns which phrase (--jh) holds its highlight.
   $$('[data-phrases]').forEach((p) => {
     const text = p.textContent.replace(/\s+/g, ' ').trim();
-    const parts = text.split(/(?<=[.,;:—!?])\s+/).filter(Boolean);
-    wrapUnits(p, parts, 'ph');
+    const phrases = text.split(/(?<=[.,;:—!?])\s+/).filter(Boolean);
+    const page = p.closest('.page') || p;
+    page.style.setProperty('--m', phrases.length);
+    const hl = (p.dataset.highlight || '').replace(/\s+/g, ' ').trim().toLowerCase();
+    let jh = 0;
+    const pos = hl ? text.toLowerCase().indexOf(hl) : -1;
+    if (pos >= 0) { let acc = 0; for (let j = 0; j < phrases.length; j++) { if (pos < acc + phrases[j].length) { jh = j; break; } acc += phrases[j].length + 1; } }
+    const nodes = [];
+    phrases.forEach((ph, j) => ph.split(' ').forEach((w) => {
+      if (nodes.length) nodes.push(document.createTextNode(' '));
+      const s = document.createElement('span');
+      s.className = 'wd2';
+      s.style.setProperty('--j', j);
+      s.textContent = w;
+      nodes.push(s);
+    }));
+    p.replaceChildren(...nodes);
+    const bloom = page.querySelector('.bloom-wrap');
+    if (bloom) bloom.style.setProperty('--jh', jh);
   });
 
   /* ───────────── 8. boot ───────────── */
