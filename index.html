@@ -48,7 +48,6 @@
 @keyframes drift-2 { 0%,100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(8%, -6%, 0) scale(.92); } }
 @keyframes drift-3 { 0%,100% { transform: translate3d(0,0,0) scale(1.05); } 50% { transform: translate3d(-5%, -7%, 0) scale(1); } }
 @keyframes ring { to { transform: rotate(360deg); } }
-@keyframes bob { 0%,100% { transform: translate3d(0,0,0); } 50% { transform: translate3d(0,-9px,0); } }
 @keyframes cue { 0% { transform: translateY(-100%); opacity: 0; } 30% { opacity: 1; } 100% { transform: translateY(100%); opacity: 0; } }
 @keyframes candle { 0%,100% { opacity: .55; transform: translate(-50%,-50%) scale(1); } 50% { opacity: .9; transform: translate(-50%,-50%) scale(1.08); } }
 @keyframes wipe { to { transform: translateX(0); } }
@@ -107,15 +106,12 @@ p { margin: 0; }
 .bsd { position: absolute; top: 5px; right: var(--gutter); font-size: 11px; color: rgba(28, 23, 36, .6); letter-spacing: 0; line-height: 1; }
 
 /* buttons */
-.btn { display: inline-block; padding: 15px 30px; border-radius: 999px; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; line-height: 1.2; transition: color .3s ease, border-color .3s ease, box-shadow .5s var(--ease), filter .3s ease; will-change: translate; }
+.btn { display: inline-block; padding: 15px 30px; border-radius: 999px; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; line-height: 1.2; transition: transform .35s var(--ease), box-shadow .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease); }
+.btn:active { transform: translateY(0); }
 .btn-grad { color: #fff; background: var(--grad); box-shadow: 0 14px 34px -14px oklch(0.6 0.2 330 / .6); }
-.btn-grad:hover { color: #fff; filter: brightness(1.06); box-shadow: 0 20px 44px -16px oklch(0.6 0.2 330 / .7); }
 .btn-ghost { color: #4a4352; border: 1px solid rgba(28, 23, 36, .16); }
-.btn-ghost:hover { color: var(--ink); border-color: oklch(0.7 0.14 330); }
 .btn-light { color: var(--night); background: linear-gradient(100deg, oklch(0.86 0.11 340), oklch(0.88 0.08 265) 60%, oklch(0.9 0.07 220)); }
-.btn-light:hover { filter: brightness(1.05); }
 .btn-ghost-dark { color: #f6f2f8; border: 1px solid rgba(246, 242, 248, .28); }
-.btn-ghost-dark:hover { color: #fff; border-color: rgba(246, 242, 248, .6); }
 .nav .btn { padding: 11px 20px; font-size: 12px; }
 
 /* hero */
@@ -135,12 +131,6 @@ p { margin: 0; }
 .portrait-ring::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--paper); }
 .hero.is-visible .portrait-ring { animation-play-state: running; }
 .portrait { position: relative; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; box-shadow: 0 0 80px oklch(0.7 0.2 330 / .35), 0 30px 60px -30px rgba(28, 23, 36, .45); }
-.chip { position: absolute; padding: 10px 16px; border-radius: 999px; background: rgba(255, 255, 255, .82); border: 1px solid rgba(28, 23, 36, .08); box-shadow: 0 14px 30px -18px rgba(28, 23, 36, .35); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); white-space: nowrap; }
-.chip > span { display: block; animation: bob 8s ease-in-out infinite; animation-play-state: paused; }
-.hero.is-visible .chip > span { animation-play-state: running; }
-.chip-1 { top: 8px; left: -120px; }
-.chip-2 { bottom: 14px; right: -96px; }
-.chip-2 > span { animation-delay: -3.5s; }
 .hero h1 { max-width: 12em; }
 .hero h1 .w { display: inline-block; opacity: 0; translate: 0 .35em; filter: blur(8px); transition: opacity .9s var(--ease), translate .9s var(--ease), filter .9s var(--ease); transition-delay: calc(var(--i, 0) * 60ms + 120ms); }
 .hero.is-in h1 .w, .no-js .hero h1 .w { opacity: 1; translate: none; filter: none; }
@@ -249,10 +239,6 @@ p { margin: 0; }
 .no-js #intro { display: none; }
 
 /* ───────────────────────────── 6. width queries ───────────────────────────── */
-@media (max-width: 1100px) {
-  .chip-2 { right: -24px; bottom: -30px; }
-  .chip-1 { left: -80px; top: -10px; }
-}
 @media (max-width: 960px) {
   .about .wrap { grid-template-columns: 1fr; }
   .about-head { position: static; }
@@ -269,7 +255,6 @@ p { margin: 0; }
 @media (max-width: 640px) {
   .hero-top { flex-direction: column; align-items: flex-start; }
   .portrait-wrap { width: 200px; height: 200px; align-self: center; margin-right: 0; }
-  .chip { display: none; }
   .b3 { display: none; }
   .blob { filter: blur(24px); }
   .hero h1 { font-size: clamp(48px, 13vw, 72px); }
@@ -281,6 +266,10 @@ p { margin: 0; }
   .depth { translate: none; }
 }
 @media (hover: hover) and (pointer: fine) {
+  .btn-grad:hover { transform: translateY(-2px); box-shadow: 0 20px 40px -16px oklch(0.6 0.2 330 / .55); }
+  .btn-light:hover { transform: translateY(-2px); box-shadow: 0 18px 36px -16px oklch(0.7 0.14 320 / .5); }
+  .btn-ghost:hover { transform: translateY(-2px); color: var(--ink); border-color: oklch(0.7 0.14 330); }
+  .btn-ghost-dark:hover { transform: translateY(-2px); color: #fff; border-color: rgba(246, 242, 248, .55); }
   .card:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -34px rgba(28, 23, 36, .35); background: linear-gradient(#fff, #fff) padding-box, linear-gradient(120deg, var(--rose), var(--sky)) border-box; }
 }
 
@@ -293,7 +282,7 @@ p { margin: 0; }
   .topic::after, .horizon { transform: none !important; transition: none !important; }
   .topic .dot { transform: translateY(-2px) !important; transition: none !important; }
   .topic p { opacity: 1; translate: none; }
-  .blob, .portrait-ring, .chip > span, .cue::after, .candle { animation: none !important; }
+  .blob, .portrait-ring, .cue::after, .candle { animation: none !important; }
   .depth { translate: none !important; }
   .card, .btn { transition: none !important; }
 }
@@ -317,7 +306,7 @@ p { margin: 0; }
     <a href="#about">About</a>
     <a href="#work">Teaching</a>
     <a href="#speaking">Speaking</a>
-    <a class="btn btn-grad" href="#contact" data-magnetic>Invite Chana Vered</a>
+    <a class="btn btn-grad" href="#contact">Invite Chana Vered</a>
   </nav>
   <span class="bsd" lang="he" dir="rtl">בס"ד</span>
 </header>
@@ -336,8 +325,6 @@ p { margin: 0; }
         <div class="portrait-wrap depth reveal" style="--d: .3; --delay: 200ms">
           <div class="portrait-ring" aria-hidden="true"></div>
           <img class="portrait" src="assets/chana.png" alt="Portrait of Chana Vered" width="204" height="192" />
-          <div class="chip chip-1 depth" style="--d: .8" aria-hidden="true"><span>Torah · Chassidut</span></div>
-          <div class="chip chip-2 depth" style="--d: 1.1" aria-hidden="true"><span>Meditation · Healing</span></div>
         </div>
       </div>
 
@@ -350,8 +337,8 @@ p { margin: 0; }
       <div class="hero-bottom">
         <p class="lede reveal" style="--delay: 520ms">Chana Vered weaves her love for ancient Jewish wisdom with meditation, mental health and energy healing — offering practical tools for healing, growth and transformation as we strive to thrive in today's rapidly changing reality.</p>
         <div class="hero-cta reveal" style="--delay: 640ms">
-          <a class="btn btn-grad" href="#contact" data-magnetic>Invite Chana Vered to speak</a>
-          <a class="btn btn-ghost" href="#about" data-magnetic>Meet Chana Vered</a>
+          <a class="btn btn-grad" href="#contact">Invite Chana Vered to speak</a>
+          <a class="btn btn-ghost" href="#about">Meet Chana Vered</a>
         </div>
       </div>
     </div>
@@ -483,8 +470,8 @@ p { margin: 0; }
       <div class="contact-cta reveal" style="--delay: 240ms">
         <!-- TODO: confirm the real contact address. Placeholder from the design: hello@chanavered.com
              It also appears once more in the footer below — update both. -->
-        <a class="btn btn-light" href="mailto:hello@chanavered.com" data-magnetic>hello@chanavered.com</a>
-        <a class="btn btn-ghost-dark" href="#top" data-magnetic>Back to top</a>
+        <a class="btn btn-light" href="mailto:hello@chanavered.com">hello@chanavered.com</a>
+        <a class="btn btn-ghost-dark" href="#top">Back to top</a>
       </div>
     </div>
   </section>
@@ -642,7 +629,6 @@ p { margin: 0; }
       hero.style.setProperty('--py', pc.y.toFixed(2));
       if (Math.abs(pt.x - pc.x) < 0.05 && Math.abs(pt.y - pc.y) < 0.05) pointerActive = false;
     }
-    magnetTick();
     requestAnimationFrame(tick);
   };
 
@@ -682,38 +668,14 @@ p { margin: 0; }
   let lastW = innerWidth;
   addEventListener('resize', () => { if (innerWidth !== lastW) { lastW = innerWidth; measure(); dirty = true; } });
 
-  /* ───────────── 6. pointer: parallax + magnetic ───────────── */
-  const magnets = [];
+  /* ───────────── 6. pointer parallax (hero only) ───────────── */
   if (fine && !reduced) {
     addEventListener('pointermove', (e) => {
       pt.x = (e.clientX / innerWidth - 0.5) * 40;
       pt.y = (e.clientY / innerHeight - 0.5) * 40;
       pointerActive = true;
-      magnetUpdate(e.clientX, e.clientY);
     }, { passive: true });
-    $$('[data-magnetic]').forEach((el) => magnets.push({ el, tx: 0, ty: 0, cx: 0, cy: 0 }));
   }
-  const magnetUpdate = (x, y) => {
-    magnets.forEach((m) => {
-      const r = m.el.getBoundingClientRect();
-      const mx = r.left + r.width / 2, my = r.top + r.height / 2;
-      const dx = x - mx, dy = y - my;
-      const inside = Math.abs(dx) < r.width / 2 + 80 && Math.abs(dy) < r.height / 2 + 80;
-      m.tx = inside ? dx * 0.3 : 0;
-      m.ty = inside ? dy * 0.3 : 0;
-    });
-  };
-  const magnetTick = () => {
-    magnets.forEach((m) => {
-      m.cx += (m.tx - m.cx) * 0.12;
-      m.cy += (m.ty - m.cy) * 0.12;
-      if (Math.abs(m.cx) < 0.05 && Math.abs(m.cy) < 0.05 && m.tx === 0 && m.ty === 0) {
-        if (m.el.style.translate) m.el.style.translate = '';
-        return;
-      }
-      m.el.style.translate = `${m.cx.toFixed(1)}px ${m.cy.toFixed(1)}px`;
-    });
-  };
 
   /* ───────────── 7. testimonials ───────────── */
   (() => {
