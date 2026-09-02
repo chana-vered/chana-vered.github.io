@@ -66,7 +66,7 @@ The file is in the same order as the page, top to bottom:
 | `teaching` | "Four ways to learn together" and its four cards |
 | `speaking` | The speaking section, your talk topics, and the big card on the right |
 | `projects` | The Projects section — each project has a logo, tagline, headline, description and link |
-| `testimonials` | The quotes that rotate one at a time |
+| `testimonials` | The quotes that appear one after another as you scroll |
 | `contact` | The dark section at the bottom — including **your email address** |
 | `footer` | The very bottom line |
 

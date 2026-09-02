@@ -239,7 +239,7 @@ projects:
 
 
 # ─── What people say ─────────────────────────────────────────────────
-#  These rotate one at a time.
+#  These appear one after another as the visitor scrolls, each spoken word by word.
 #  To add another, copy one whole block starting at "- quote:".
 testimonials:
   eyebrow: >-
