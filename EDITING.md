@@ -65,6 +65,7 @@ The file is in the same order as the page, top to bottom:
 | `about` | The About section and the quote in the coloured box |
 | `teaching` | "Four ways to learn together" and its four cards |
 | `speaking` | The speaking section, your talk topics, and the big card on the right |
+| `projects` | The Projects section — each project has a logo, tagline, headline, description and link |
 | `testimonials` | The quotes that rotate one at a time |
 | `contact` | The dark section at the bottom — including **your email address** |
 | `footer` | The very bottom line |
@@ -74,10 +75,13 @@ one place — under `contact`, next to `email`. Both update together.
 
 ### Adding or removing an item
 
-The stat cards, teaching cards, talk topics and testimonials are lists. Each item
+The stat cards, teaching cards, talk topics, projects and testimonials are lists. Each item
 starts with a `-`. To add one, copy an entire block (from its `-` down to the line
 before the next `-`) and paste it below, then change the words. To remove one,
 delete its whole block. The spacing and animations sort themselves out.
+
+One exception: a **project** needs all six of its lines filled in, including `logo`.
+If you want to add a project, ask Hillel to add its logo image first.
 
 ---
 

@@ -199,6 +199,21 @@ p { margin: 0; }
 .talk-title .line { display: block; }
 .talk-label { margin-top: 24px; font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--eyebrow); }
 
+/* projects */
+.projects { background: #fff; border-block: 1px solid var(--hair); }
+.projects .lede { margin-top: 22px; }
+.project-list { display: grid; gap: 20px; margin-top: clamp(36px, 4.5vw, 60px); }
+.project { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: clamp(24px, 3.5vw, 52px); align-items: center; padding: clamp(24px, 3vw, 40px); border-radius: 22px; border: 1px solid var(--hair); background: #fff; transition: transform .5s var(--ease), box-shadow .5s var(--ease); }
+/* Pale-to-white so the logo's light-grey tree watermark reads correctly,
+   and a soft blue mist echoing geu.la's own banner — in our palette. */
+.project-mark { display: grid; place-items: center; padding: clamp(20px, 3vw, 34px); border-radius: 16px; background: linear-gradient(160deg, #fff 20%, oklch(0.95 0.03 235)); }
+.project-mark img { width: 100%; height: auto; max-width: 230px; }
+.project-tagline { font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: oklch(0.5 0.13 250); }
+.project h3 { margin: 16px 0 14px; font-size: clamp(26px, 2.4vw, 34px); }
+.project-body p:last-of-type { font-size: 16px; line-height: 1.65; color: var(--ink-3); max-width: 32em; }
+.project-body .btn { margin-top: 28px; }
+.btn-cool { color: #fff; background: linear-gradient(100deg, var(--violet), var(--sky)); box-shadow: 0 14px 34px -14px oklch(0.6 0.16 260 / .6); }
+
 /* voices */
 .voices .eyebrow { margin-bottom: clamp(36px, 5vw, 64px); }
 .stage { display: grid; }
@@ -249,6 +264,10 @@ p { margin: 0; }
   .about-head { position: static; }
   .about-body { max-width: none; }
 }
+@media (max-width: 860px) {
+  .project { grid-template-columns: 1fr; justify-items: start; }
+  .project-mark { width: 100%; max-width: 300px; }
+}
 @media (max-width: 720px) {
   .header { flex-wrap: wrap; justify-content: center; row-gap: 2px; padding-top: 24px; padding-bottom: 8px; }
   .brand img { height: 36px; }
@@ -275,6 +294,8 @@ p { margin: 0; }
   .btn-light:hover { transform: translateY(-2px); box-shadow: 0 18px 36px -16px oklch(0.7 0.14 320 / .5); }
   .btn-ghost:hover { transform: translateY(-2px); color: var(--ink); border-color: oklch(0.7 0.14 330); }
   .btn-ghost-dark:hover { transform: translateY(-2px); color: #fff; border-color: rgba(246, 242, 248, .55); }
+  .project:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -34px rgba(28, 23, 36, .35); }
+  .btn-cool:hover { transform: translateY(-2px); box-shadow: 0 20px 40px -16px oklch(0.6 0.16 260 / .55); }
   .card:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -34px rgba(28, 23, 36, .35); background: linear-gradient(#fff, #fff) padding-box, linear-gradient(120deg, var(--rose), var(--sky)) border-box; }
 }
 
@@ -311,6 +332,7 @@ p { margin: 0; }
     <a href="#about">{{ site.data.content.nav.about | escape }}</a>
     <a href="#work">{{ site.data.content.nav.teaching | escape }}</a>
     <a href="#speaking">{{ site.data.content.nav.speaking | escape }}</a>
+    <a href="#projects">{{ site.data.content.nav.projects | escape }}</a>
     <a class="btn btn-grad" href="#contact">{{ site.data.content.nav.button | escape }}</a>
   </nav>
   <span class="bsd" lang="he" dir="rtl">בס"ד</span>
@@ -419,6 +441,31 @@ p { margin: 0; }
       <div class="talk reveal" style="--delay: 160ms">
         <p class="talk-title grad" aria-label="{{ site.data.content.speaking.feature_line_1 | escape }} {{ site.data.content.speaking.feature_line_2 | escape }} {{ site.data.content.speaking.feature_line_3 | escape }}"><span class="line reveal" style="--delay: 360ms">{{ site.data.content.speaking.feature_line_1 | escape }}</span><span class="line reveal" style="--delay: 480ms">{{ site.data.content.speaking.feature_line_2 | escape }}</span><span class="line reveal" style="--delay: 600ms">{{ site.data.content.speaking.feature_line_3 | escape }}</span></p>
         <p class="talk-label reveal" style="--delay: 760ms">{{ site.data.content.speaking.feature_caption | escape }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section projects">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="eyebrow">{{ site.data.content.projects.eyebrow | escape }}</p>
+        <h2>{{ site.data.content.projects.heading | escape }}</h2>
+        <p class="lede">{{ site.data.content.projects.intro | escape }}</p>
+      </div>
+      <div class="project-list">
+        {%- for item in site.data.content.projects.items %}
+        <article class="project reveal" style="--delay: {{ forloop.index0 | times: 120 | plus: 120 }}ms">
+          <div class="project-mark">
+            <img src="{{ item.logo | escape }}" alt="{{ item.name | escape }}" width="540" height="504" loading="lazy" />
+          </div>
+          <div class="project-body">
+            <p class="project-tagline">{{ item.tagline | escape }}</p>
+            <h3>{{ item.heading | escape }}</h3>
+            <p>{{ item.description | escape }}</p>
+            <a class="btn btn-cool" href="{{ item.link | escape }}" target="_blank" rel="noopener noreferrer">{{ item.link_label | escape }}<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+          </div>
+        </article>
+        {%- endfor %}
       </div>
     </div>
   </section>
