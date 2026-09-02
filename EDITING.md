@@ -3,7 +3,7 @@
 All the text on the site lives in **one file**. You don't need to know any code —
 you just change the words and press a button.
 
-**→ [Click here to edit the words](https://github.com/hillelcoren/chana-vered.github.io/edit/main/_data/content.yml)**
+**→ [Click here to edit the words](https://github.com/hillelcoren/chana-vered.github.io/edit/main/content.yml)**
 
 ---
 
@@ -96,17 +96,24 @@ version of the file — Hillel can restore it in a few seconds.
 ## For the developer
 
 The site is a Jekyll build on GitHub Pages — no workflow file, no build script.
-`_data/content.yml` is the only content source; `index.html` is the template.
+`content.yml` is the only content source; `index.html` is the template.
 
-- `_config.yml` sets `liquid.strict_variables` / `strict_filters`, so a missing key
-  fails the build loudly (naming the key and line) instead of silently publishing a
-  blank spot. A failed build leaves the live site on its last good version.
+- `_config.yml` sets `data_dir: .`, which is what lets `content.yml` sit at the repo
+  root instead of in a `_data/` folder while still being read as `site.data.content`.
+  It's also excluded there so it isn't copied into the built site.
+- `liquid.strict_variables` / `strict_filters` are on, so a missing key fails the build
+  loudly (naming the key and line) instead of silently publishing a blank spot. A
+  failed build leaves the live site on its last good version.
 - Every value is emitted through `| escape`, so typed `<`, `>` and `&` render as
   text and can't inject markup.
-- Every value in the YAML uses a `>-` block. This is load-bearing, not style: the
+- Every value in `content.yml` uses a `>-` block. This is load-bearing, not style: the
   real copy contains colons (`disciplines woven together: …`, the `1:1` stat) that
   would break a plain YAML scalar.
-- **Local preview changed.** The repo's `index.html` now contains Liquid, so serving
-  the repo root directly (Valet at `chana-vered.github.io.test`) shows raw `{{ }}`.
-  Either point Valet at `_site/`, or run `bundle exec jekyll serve` → `localhost:4000`.
-  `_site/` is gitignored.
+- **Local preview.** `index.html` contains Liquid, so serving the repo root directly
+  (Valet at `chana-vered.github.io.test`) shows raw template syntax. Build first:
+
+      jekyll build -d /tmp/cv-site
+
+  and point Valet at `/tmp/cv-site`, or use `jekyll serve` → `localhost:4000`. There is
+  deliberately no `Gemfile`: Jekyll auto-loads bundler whenever one is present, which
+  breaks the build unless the `github-pages` bundle is installed locally.
