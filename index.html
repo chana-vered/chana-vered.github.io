@@ -129,13 +129,29 @@ main, .header, .footer { position: relative; z-index: 1; }
 .hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: center; padding-top: 120px; padding-bottom: clamp(56px, 7vw, 100px); overflow: hidden; contain: paint; }
 /* Leaving the hero: it dissolves behind the stats. --hp runs 0→1 over the hero's own height
    (after a 40px dead zone); opacity is (1 - hp)² so it holds, then lets go. */
-.hero-bg, .aurora { position: absolute; inset: -60px; pointer-events: none; z-index: 0; }
-.hero-bg { transform: translate3d(0, calc(var(--hp, 0) * -40px), 0); opacity: calc(1 - var(--hp, 0) * .4); }
-.blob { position: absolute; border-radius: 50%; filter: blur(30px); will-change: transform; animation-play-state: paused; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
-.b1 { top: -12%; right: -8%; width: 58vw; height: 58vw; max-width: 820px; max-height: 820px; background: radial-gradient(circle at 45% 45%, oklch(0.87 0.11 335 / .75), oklch(0.9 0.08 330 / .25) 45%, transparent 68%); animation-name: drift-1; animation-duration: 28s; }
-.b2 { bottom: -22%; left: -14%; width: 62vw; height: 62vw; max-width: 900px; max-height: 900px; background: radial-gradient(circle at 55% 45%, oklch(0.86 0.09 235 / .7), oklch(0.9 0.06 240 / .2) 45%, transparent 68%); animation-name: drift-2; animation-duration: 32s; }
-.b3 { top: 30%; left: 34%; width: 40vw; height: 40vw; max-width: 560px; max-height: 560px; background: radial-gradient(circle, oklch(0.88 0.09 290 / .55), transparent 65%); animation-name: drift-3; animation-duration: 26s; }
-.is-visible .blob { animation-play-state: running; }
+/* the living aurora — one page-wide field beneath everything. Six soft blobs (softness is in
+   the gradient stops, no blur filter, so it can be always on), each with a dawn face and a
+   dusk face crossfaded by the sky's progress; the whole field drifts up and slowly turns with
+   the scroll, and every blob shifts with the pointer by its depth (.depth). */
+.aurora-field { position: absolute; inset: -20vh -20vw; pointer-events: none; --dusk-mix: clamp(0, calc((var(--sp, .25) - .45) * 2.5), 1); transform: translate3d(0, calc(var(--sp, .25) * -12vh), 0) rotate(calc(var(--sp, .25) * 24deg)); transform-origin: 50% 50%; will-change: transform; }
+.blob-d { position: absolute; }
+.blob { position: relative; width: 100%; height: 100%; border-radius: 50%; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+.blob::before, .blob::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--dawn); }
+.blob::after { background: var(--dusk); opacity: var(--dusk-mix, 0); }
+.b1 { top: 4%; right: 6%; width: 58vw; height: 58vw; max-width: 820px; max-height: 820px; }
+.b1 .blob { --dawn: radial-gradient(circle at 45% 45%, oklch(0.87 0.11 335 / .62), oklch(0.9 0.08 330 / .22) 40%, transparent 72%); --dusk: radial-gradient(circle at 45% 45%, oklch(0.84 0.12 350 / .62), oklch(0.88 0.08 345 / .22) 40%, transparent 72%); animation-name: drift-1; animation-duration: 28s; }
+.b2 { bottom: 2%; left: 4%; width: 62vw; height: 62vw; max-width: 900px; max-height: 900px; }
+.b2 .blob { --dawn: radial-gradient(circle at 55% 45%, oklch(0.86 0.09 235 / .58), oklch(0.9 0.06 240 / .18) 40%, transparent 72%); --dusk: radial-gradient(circle at 55% 45%, oklch(0.82 0.1 285 / .58), oklch(0.88 0.06 290 / .18) 40%, transparent 72%); animation-name: drift-2; animation-duration: 32s; }
+.b3 { top: 38%; left: 40%; width: 40vw; height: 40vw; max-width: 560px; max-height: 560px; }
+.b3 .blob { --dawn: radial-gradient(circle, oklch(0.88 0.09 290 / .45), transparent 68%); --dusk: radial-gradient(circle, oklch(0.84 0.1 320 / .45), transparent 68%); animation-name: drift-3; animation-duration: 26s; }
+.b4 { top: 8%; left: 6%; width: 44vw; height: 44vw; max-width: 640px; max-height: 640px; }
+.b4 .blob { --dawn: radial-gradient(circle at 50% 50%, oklch(0.9 0.07 300 / .4), transparent 70%); --dusk: radial-gradient(circle at 50% 50%, oklch(0.85 0.09 340 / .4), transparent 70%); animation-name: drift-2; animation-duration: 36s; animation-delay: -9s; }
+.b5 { top: 48%; right: 2%; width: 46vw; height: 46vw; max-width: 660px; max-height: 660px; }
+.b5 .blob { --dawn: radial-gradient(circle at 45% 55%, oklch(0.88 0.08 225 / .42), transparent 70%); --dusk: radial-gradient(circle at 45% 55%, oklch(0.83 0.09 255 / .42), transparent 70%); animation-name: drift-3; animation-duration: 30s; animation-delay: -14s; }
+.b6 { bottom: 4%; right: 24%; width: 50vw; height: 50vw; max-width: 720px; max-height: 720px; }
+.b6 .blob { --dawn: radial-gradient(circle at 50% 45%, oklch(0.9 0.08 345 / .38), transparent 70%); --dusk: radial-gradient(circle at 50% 45%, oklch(0.84 0.11 355 / .4), transparent 70%); animation-name: drift-1; animation-duration: 34s; animation-delay: -20s; }
+/* a soft light that follows the pointer (fine pointers only), lagging a little behind it */
+.light { position: absolute; left: 0; top: 0; width: 60vw; height: 60vw; border-radius: 50%; background: radial-gradient(circle, oklch(0.97 0.06 340 / .5), oklch(0.96 0.05 250 / .2) 35%, transparent 62%); transform: translate3d(calc(var(--mx, 50vw) - 30vw), calc(var(--my, 50vh) - 30vw), 0); opacity: var(--ml, 0); transition: opacity 1.2s ease; pointer-events: none; will-change: transform; }
 .hero .wrap { position: relative; z-index: 1; width: 100%; }
 .depth { translate: calc(var(--px, 0) * var(--d, 1) * 1px) calc(var(--py, 0) * var(--d, 1) * 1px); transition: translate .1s linear; }
 .hero-top { display: flex; align-items: flex-end; justify-content: space-between; gap: clamp(28px, 5vw, 80px); margin-bottom: clamp(36px, 5vw, 72px); }
@@ -194,7 +210,7 @@ html.is-pinned .stage > .wrap { width: 100%; }
    paragraph takes the stage as a page in big type, read phrase by phrase (the words of a
    phrase rise and ink together); a key phrase from each paragraph blooms large behind it.
    In flow mode the pages stack and each bloom becomes a subhead above its paragraph. */
-.about .stage { background: rgba(255, 255, 255, .9); border-block: 1px solid var(--hair); }
+.about .stage { background: rgba(255, 255, 255, .84); border-block: 1px solid var(--hair); }
 .about-pages { z-index: 1; } /* not positioned: the heading's corner slot must resolve against the stage */
 .about-head h2 { margin-top: 18px; }
 .about-body { display: grid; gap: clamp(40px, 6vh, 72px); margin-top: clamp(32px, 5vh, 56px); }
@@ -243,8 +259,7 @@ html.is-pinned .card { flex: 0 0 clamp(250px, 24.5%, 300px); }
 .i4 { background: linear-gradient(140deg, oklch(0.68 0.14 220), oklch(0.75 0.12 205)); }
 
 /* speaking — afternoon, the aurora returns; the title lines rise from a clip with an exhale */
-.speaking .stage { background: linear-gradient(150deg, oklch(0.97 0.02 330 / .85), oklch(0.96 0.025 245 / .85)); border-block: 1px solid var(--hair); overflow: clip; }
-.aurora { transform: translate3d(0, calc(var(--pw, 0) * -140px), 0); }
+.speaking .stage { background: linear-gradient(150deg, oklch(0.97 0.02 330 / .7), oklch(0.96 0.025 245 / .7)); border-block: 1px solid var(--hair); overflow: clip; }
 .speaking .wrap { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: clamp(32px, 6vw, 96px); align-items: center; }
 .speaking-head { transform: translate3d(0, calc((.5 - var(--pm, .5)) * 12px), 0); }
 .speaking h2 { margin: 18px 0 24px; }
@@ -265,7 +280,7 @@ html.is-pinned .card { flex: 0 0 clamp(250px, 24.5%, 300px); }
 .talk-label { --k: 8px; margin-top: 24px; font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--eyebrow); }
 
 /* projects — flowing; the logo panel inks in while the text rises, two layers of depth */
-.projects { background: rgba(255, 255, 255, .9); border-block: 1px solid var(--hair); }
+.projects { background: rgba(255, 255, 255, .84); border-block: 1px solid var(--hair); }
 .projects .lede { margin-top: 22px; }
 .project-list { display: grid; gap: 20px; margin-top: clamp(36px, 4.5vw, 60px); }
 .project { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: clamp(24px, 3.5vw, 52px); align-items: center; padding: clamp(24px, 3vw, 40px); border-radius: 22px; border: 1px solid var(--hair); background: #fff; transition: translate .5s var(--ease), box-shadow .5s var(--ease); }
@@ -364,11 +379,11 @@ html.is-pinned .night::before { content: ""; position: absolute; left: 0; right:
 }
 @media (hover: none), (pointer: coarse) {
   .depth { translate: none; }
-  /* Phones: a lighter hero exit — no per-frame movement of the blurred aurora layers. */
-  .hero-logo, .hero-bg { transform: none; opacity: 1; }
+  /* Phones: a lighter hero exit; no pointer light. */
+  .hero-logo { transform: none; opacity: 1; }
   .hero h1, .portrait-exit { transform: translate3d(0, calc(var(--hp, 0) * -30px), 0); }
   .ring-turn { transform: none; }
-  .glow { display: none; }
+  .glow, .light { display: none; }
 }
 @media (hover: hover) and (pointer: fine) {
   .btn-grad:hover { transform: translateY(-2px); box-shadow: 0 20px 40px -16px oklch(0.6 0.2 330 / .55); }
@@ -391,9 +406,10 @@ html.is-pinned .night::before { content: ""; position: absolute; left: 0; right:
   .blob, .portrait-ring, .cue::after, .candle { animation: none !important; }
   .depth { translate: none !important; }
   .card, .btn { transition: none !important; }
-  .sky-ramp, .glow, .ring-turn, .aurora, .about-head, .page, .wd2, .bloom-wrap, .speaking-head, .talk, .icon, .project-mark, .project-body, .project-mark img, .cards, .stage-quotes { transform: none !important; }
+  .sky-ramp, .glow, .ring-turn, .aurora-field, .about-head, .page, .wd2, .bloom-wrap, .speaking-head, .talk, .icon, .project-mark, .project-body, .project-mark img, .cards, .stage-quotes { transform: none !important; }
   .wd2, .bloom-wrap, .page, .about-pages { opacity: 1 !important; }
-  .hero h1, .hero-logo, .portrait-exit, .hero-bg { transform: none !important; opacity: 1 !important; }
+  .light { display: none !important; }
+  .hero h1, .hero-logo, .portrait-exit { transform: none !important; opacity: 1 !important; }
   [data-item], .quote[data-item], .wd, .ph, .quote figcaption, .candle-wrap, .night-content, .night, .night h2 em, .stat, .stat p { opacity: 1 !important; transform: none !important; }
   .pull p, .name, .big-quote, .card, .project-mark, .talk-title .line, .stat strong { clip-path: none !important; }
   .horizon, .topic::after, .card::before { transform: none !important; }
@@ -405,7 +421,18 @@ html.is-pinned .night::before { content: ""; position: absolute; left: 0; right:
 </head>
 <body>
 
-<div class="sky" aria-hidden="true"><div class="sky-ramp"></div></div>
+<div class="sky" aria-hidden="true">
+  <div class="sky-ramp"></div>
+  <div class="aurora-field">
+    <div class="blob-d b1 depth" style="--d: .5"><div class="blob"></div></div>
+    <div class="blob-d b2 depth" style="--d: .9"><div class="blob"></div></div>
+    <div class="blob-d b3 depth" style="--d: 1.2"><div class="blob"></div></div>
+    <div class="blob-d b4 depth" style="--d: .7"><div class="blob"></div></div>
+    <div class="blob-d b5 depth" style="--d: 1.05"><div class="blob"></div></div>
+    <div class="blob-d b6 depth" style="--d: .4"><div class="blob"></div></div>
+  </div>
+  <div class="light"></div>
+</div>
 
 <div id="intro" aria-hidden="true" inert>
   <div class="intro-logo-wrap">
@@ -432,12 +459,6 @@ html.is-pinned .night::before { content: ""; position: absolute; left: 0; right:
   <div class="thread" aria-hidden="true"><div class="thread-fill"></div></div>
 
   <section id="top" class="hero grain">
-    <div class="hero-bg" aria-hidden="true">
-      <div class="blob b1 depth" style="--d: .5"></div>
-      <div class="blob b2 depth" style="--d: .9"></div>
-      <div class="blob b3 depth" style="--d: 1.2"></div>
-    </div>
-
     <div class="wrap">
       <div class="hero-top">
         <img class="hero-logo reveal reveal-fade" src="assets/logo.png" alt="Chana Vered" width="1600" height="484" />
@@ -542,11 +563,6 @@ html.is-pinned .night::before { content: ""; position: absolute; left: 0; right:
 
   <section id="speaking" class="chapter speaking" data-pin>
     <div class="stage">
-      <div class="aurora" aria-hidden="true">
-        <div class="blob b1"></div>
-        <div class="blob b2"></div>
-        <div class="blob b3"></div>
-      </div>
       <div class="glow" aria-hidden="true"></div>
       <div class="wrap">
         <div>
@@ -771,7 +787,7 @@ html.is-pinned .night::before { content: ""; position: absolute; left: 0; right:
   const thread = $('.thread');
   const marker = $('#contact');
   const night = $('.night');
-  const sky = $('.sky-ramp');
+  const sky = $('.sky'); // --sp is set on the container so the ramp, the aurora field and the light all inherit it
   let pinned = false;
   let flowItems = [];
   let vh = innerHeight, heroH = 1, threadTop = 0, threadH = 1, maxY = 1;
@@ -929,9 +945,13 @@ html.is-pinned .night::before { content: ""; position: absolute; left: 0; right:
     thread.style.setProperty('--tfade', (1 - threadFade).toFixed(3));
   };
 
-  // pointer parallax target/current (hero only)
+  // pointer: parallax by depth (--px/--py on the root, read by every .depth) and the light that
+  // follows the cursor (--mx/--my on .light, lagging on a slow ease)
+  const light = $('.light');
   const pt = { x: 0, y: 0 };
   const pc = { x: 0, y: 0 };
+  const lt = { x: innerWidth / 2, y: innerHeight / 2 };
+  const lc = { x: innerWidth / 2, y: innerHeight / 2 };
   let pointerActive = false;
 
   const tick = (t) => {
@@ -942,9 +962,14 @@ html.is-pinned .night::before { content: ""; position: absolute; left: 0; right:
     if (pointerActive) {
       pc.x += (pt.x - pc.x) * 0.06;
       pc.y += (pt.y - pc.y) * 0.06;
-      hero.style.setProperty('--px', pc.x.toFixed(2));
-      hero.style.setProperty('--py', pc.y.toFixed(2));
-      if (Math.abs(pt.x - pc.x) < 0.05 && Math.abs(pt.y - pc.y) < 0.05) pointerActive = false;
+      html.style.setProperty('--px', pc.x.toFixed(2));
+      html.style.setProperty('--py', pc.y.toFixed(2));
+      const k = 1 - Math.exp(-dt / 0.25);
+      lc.x += (lt.x - lc.x) * k;
+      lc.y += (lt.y - lc.y) * k;
+      if (Math.abs(lt.x - lc.x) < 1 && Math.abs(lt.y - lc.y) < 1) { lc.x = lt.x; lc.y = lt.y; } // land, don't creep
+      if (light) { light.style.setProperty('--mx', `${lc.x.toFixed(1)}px`); light.style.setProperty('--my', `${lc.y.toFixed(1)}px`); }
+      if (Math.abs(pt.x - pc.x) < 0.05 && Math.abs(pt.y - pc.y) < 0.05 && lc.x === lt.x && lc.y === lt.y) pointerActive = false;
     }
     // idle when nothing is converging and the pointer is still; the listeners wake us
     if (moving || pointerActive || dirty) requestAnimationFrame(tick); else running = false;
@@ -1087,6 +1112,8 @@ html.is-pinned .night::before { content: ""; position: absolute; left: 0; right:
     addEventListener('pointermove', (e) => {
       pt.x = (e.clientX / innerWidth - 0.5) * 40;
       pt.y = (e.clientY / innerHeight - 0.5) * 40;
+      lt.x = e.clientX; lt.y = e.clientY;
+      if (light) light.style.setProperty('--ml', '1');
       pointerActive = true;
       wake();
     }, { passive: true });
