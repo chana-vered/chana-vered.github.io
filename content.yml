@@ -70,30 +70,6 @@ hero:
     Meet Chana Vered
 
 
-# ─── The four small cards with big numbers ───────────────────────────
-#  To add another card, copy one whole block starting at "- number:".
-stats:
-  - number: >-
-      15+
-    text: >-
-      years teaching Torah to women around the world
-
-  - number: >-
-      1,000s
-    text: >-
-      students reached through classes, retreats and talks
-
-  - number: >-
-      3
-    text: >-
-      disciplines woven together: text, meditation, energy work
-
-  - number: >-
-      1:1
-    text: >-
-      mentorship for those ready to go deeper
-
-
 # ─── About ───────────────────────────────────────────────────────────
 about:
   eyebrow: >-
@@ -224,11 +200,11 @@ projects:
     Where the learning keeps going
 
   intro: >-
-    Alongside teaching and speaking, Chana Vered builds places for this
-    wisdom to live online.
+    Alongside teaching and speaking, Chana Vered builds and helps lead places
+    where this wisdom keeps living — online and in the world.
 
   # To add another project, copy a whole block starting at "- name:".
-  # Every project needs all six lines below — including logo. For the logo,
+  # Every project needs all seven lines below — including logo. For the logo,
   # ask Hillel to add the image file first, then put its name here.
   items:
     - name: >-
@@ -240,12 +216,77 @@ projects:
       heading: >-
         A directory of universal Torah resources
       description: >-
-        Articles and videos gathered into one place you can search, filter
-        and browse.
+        Articles and videos gathered into one place you can search, filter and
+        browse. Chana Vered is its creator.
       link: >-
         https://geu.la/
       link_label: >-
         Visit geu.la
+
+    - name: >-
+        Purim High Council
+      logo: >-
+        assets/purim.png
+      tagline: >-
+        Womens Mishtei, Esther's Way
+      heading: >-
+        Purim, integrated in joyful community
+      description: >-
+        A thirty-two-year tradition of prayer, meditation and movement, kept by
+        women in living rooms and on Zoom around the world. Chana Vered is
+        Project Coordinator and Lead Educator of its Moonlit Circle.
+      link: >-
+        https://www.malkasima.com/purim-high-council
+      link_label: >-
+        Visit the Purim High Council
+
+    - name: >-
+        Maim Haim
+      logo: >-
+        assets/maimhaim.png
+      tagline: >-
+        Ein Gedi, Dead Sea · November 2026
+      heading: >-
+        Women's Retreat & Geula Festival
+      description: >-
+        Three days of Torah, healing work, music and rest over Rosh Chodesh
+        Kislev, where Chana Vered is among those teaching.
+      link: >-
+        https://www.maimhaim.org/retreatfestival
+      link_label: >-
+        See the retreat
+
+    - name: >-
+        Kavana
+      logo: >-
+        assets/kavana.svg
+      tagline: >-
+        Kavana: Mindful Judaism
+      heading: >-
+        Jewish meditation, in your pocket
+      description: >-
+        Guided meditations, sleep stories and daily practices drawn from Torah,
+        on iPhone and Android. Chana Vered is one of its teachers.
+      link: >-
+        https://kavanaapp.com/
+      link_label: >-
+        Visit kavanaapp.com
+
+    - name: >-
+        Wrapt Magazine
+      logo: >-
+        assets/wrapt.png
+      tagline: >-
+        Fashion · Art · Lifestyle · Motherhood
+      heading: >-
+        A magazine built on what women share
+      description: >-
+        Fashion, art, motherhood and culture, gathered around what women have in
+        common rather than what separates them.
+      link: >-
+        https://www.wraptmagazine.com/
+      link_label: >-
+        Read Wrapt
 
 
 # ─── What people say ─────────────────────────────────────────────────

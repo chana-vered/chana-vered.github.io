@@ -61,7 +61,6 @@ The file is in the same order as the page, top to bottom:
 | `site` | The browser tab title, and the description Google shows |
 | `nav` | The menu at the top |
 | `hero` | The opening screen: the tagline, the big headline, the buttons |
-| `stats` | The four small cards with the big numbers |
 | `about` | The About section — three paragraphs, a highlight phrase for each (copied from the paragraph; it appears large behind it), and the quote |
 | `teaching` | "Four ways to learn together" and its four cards |
 | `speaking` | The speaking section, your talk topics, and the big card on the right |
@@ -75,12 +74,12 @@ one place — under `contact`, next to `email`. Both update together.
 
 ### Adding or removing an item
 
-The stat cards, teaching cards, talk topics, projects and testimonials are lists. Each item
+The teaching cards, talk topics, projects and testimonials are lists. Each item
 starts with a `-`. To add one, copy an entire block (from its `-` down to the line
 before the next `-`) and paste it below, then change the words. To remove one,
 delete its whole block. The spacing and animations sort themselves out.
 
-One exception: a **project** needs all six of its lines filled in, including `logo`.
+One exception: a **project** needs all seven of its lines filled in, including `logo`.
 If you want to add a project, ask Hillel to add its logo image first.
 
 ---
@@ -111,7 +110,7 @@ The site is a Jekyll build on GitHub Pages — no workflow file, no build script
 - Every value is emitted through `| escape`, so typed `<`, `>` and `&` render as
   text and can't inject markup.
 - Every value in `content.yml` uses a `>-` block. This is load-bearing, not style: the
-  real copy contains colons (`disciplines woven together: …`, the `1:1` stat) that
+  real copy contains colons (`Geula: Revealing A Divine World`, `Kavana: Mindful Judaism`) that
   would break a plain YAML scalar.
 - **Local preview.** `index.html` contains Liquid, so serving the repo root directly
   (Valet at `chana-vered.github.io.test`) shows raw template syntax. Build first:
