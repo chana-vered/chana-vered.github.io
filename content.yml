@@ -83,7 +83,7 @@ about:
 
   paragraph_2: >-
     Her classes combine text study, meditation and energy work: ensuring that wisdom is not just understood, but also received directly into the vessel as actionable tools. Wisdom that stays in the mind changes very little; wisdom that
-    setlles into our daily life transforms everything. 
+    settles into our daily life transforms everything. 
 
   paragraph_3: >-
     She teaches internationally, mentors privately, and speaks to communities,
@@ -140,7 +140,7 @@ teaching:
     - title: >-
         Living Torah Community
       text: >-
-        A vibrant digital space receiving weekly guidnce, practical spiritual tools and ongoing inspiration for daily healing, growth and transformation.
+        A vibrant digital space receiving weekly guidance, practical spiritual tools and ongoing inspiration for daily healing, growth and transformation.
 
 
 # ─── Speaking ────────────────────────────────────────────────────────
@@ -292,10 +292,12 @@ testimonials:
 
   quotes:
     - quote: >-
-        “Learning with Chana Vered is more than just a lesson, it is a full body experience." 
+        “Learning with Chana Vered is more than just a lesson, it is a full body experience.”
+      author: >-
         Student, weekly Inner Torah class
+
     - quote: >-
-        “Chana Vered's warmth, wisdom, and ability to connect Torah to everyday life make learning with her a truly enriching experience."
+        “Chana Vered's warmth, wisdom, and ability to connect Torah to everyday life make learning with her a truly enriching experience.”
       author: >-
         Student, Moonlit Circle Online Journey
 
@@ -307,7 +309,7 @@ testimonials:
     - quote: >-
         “I never really felt connected to Purim in a spiritual way. So much focus was always on the external - costumes, gifts of food. Participating in the Purim High Council allowed me to tap into the incredible power of the day and infused Purim with so much meaning. I now look forward to it all year. Chana Vered was the perfect guide for this journey. ”
       author: >-
-        Purim High Council Particpant
+        Purim High Council Participant
 
 
 # ─── Get in touch (the dark section at the bottom) ───────────────────
