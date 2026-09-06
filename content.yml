@@ -19,18 +19,19 @@
 # ─── Browser tab & Google search result ──────────────────────────────
 site:
   title: >-
-    Chana Vered — Torah Educator, Spiritual Mentor & Speaker
+    Chana Vered — Kabbalah of the Feminine, Inner Torah & Speaker
 
   description: >-
-    Chana Vered weaves her love for ancient Jewish wisdom with meditation,
-    mental health and energy healing — offering practical tools for healing,
-    growth and transformation.
+    Chana Vered teaches the Kabbalah of the Feminine — the mystical dimension
+    of Torah — through embodied learning, somatic movement and Rosh Chodesh
+    circles.
 
   # The short description used when someone shares the site on WhatsApp,
   # Facebook or X.
   share_description: >-
-    Ancient wisdom, practical healing. Torah classes, meditation, private
-    mentorship, retreats and speaking with Chana Vered.
+    Ancient wisdom, awakened within. Inner Torah, embodied learning, somatic
+    movement, meditation and women's Rosh Chodesh gatherings with
+    Chana Vered.
 
 
 # ─── The menu at the top ─────────────────────────────────────────────
@@ -50,19 +51,18 @@ nav:
 # ─── The opening screen ──────────────────────────────────────────────
 hero:
   eyebrow: >-
-    Torah Educator · Spiritual Mentor · Speaker
+    Kabbalah of the Feminine · Teacher · Speaker
 
   # The big headline. The second line is the one in colour.
   title_line_1: >-
     Ancient wisdom,
   title_line_2: >-
-    practical healing.
+    awakened within.
 
   intro: >-
-    Chana Vered weaves her love for ancient Jewish wisdom with meditation,
-    mental health and energy healing — offering practical tools for healing,
-    growth and transformation as we strive to thrive in today's rapidly
-    changing reality.
+    Chana Vered teaches the inner, mystical dimension of Torah — the Kabbalah
+    of the Feminine — not as information but as something you live: in your
+    body, in your week, in the turning of the Hebrew months.
 
   button_primary: >-
     Invite Chana Vered to speak
@@ -76,24 +76,24 @@ about:
     About
 
   heading: >-
-    A teacher who begins with the human being in front of her.
+    A teacher who begins with the woman in front of her.
 
   paragraph_1: >-
-    Chana Vered is a passionate Torah educator, spiritual mentor and
-    inspirational speaker. Her teaching starts where life actually happens —
-    in anxiety, in transition, in the ordinary weeks that ask more of us than
-    we thought we had.
+    Chana Vered does not teach the inner Torah as a subject. She teaches it as
+    something to be inhabited — and that begins where life actually happens: in
+    the body, in the breath, in the ordinary weeks that ask more of us than we
+    thought we had.
 
   paragraph_2: >-
-    Drawing on decades of Jewish thought alongside meditation, mental health
-    awareness and energy healing, she translates ideas that can feel abstract
-    into something you can use before the day is over. Her classes are warm,
-    unhurried and honest, and they leave people with tools rather than
-    inspiration alone.
+    Her classes are embodied Torah learning: text alongside somatic movement,
+    meditation and deep listening, so that an idea is not only understood but
+    felt. Wisdom that stays in the head changes very little; wisdom that
+    reaches the body changes the week.
 
   paragraph_3: >-
     She teaches internationally, mentors privately, and speaks to communities,
-    schools and organizations looking for depth without heaviness.
+    schools and organizations. Each Rosh Chodesh she gathers women in a circle —
+    learning the year through the Hebrew months, in alignment with the moon.
 
   # One phrase from each paragraph, copied exactly as it appears above. It blooms
   # large behind the paragraph as that part is read. Keep all three lines, even
@@ -101,53 +101,54 @@ about:
   paragraph_1_highlight: >-
     in the ordinary weeks that ask more of us than we thought we had
   paragraph_2_highlight: >-
-    tools rather than inspiration alone
+    not only understood but felt
   paragraph_3_highlight: >-
-    depth without heaviness
+    in alignment with the moon
 
   # The quote in the coloured box.
   quote: >-
     The wisdom was never meant to stay on the page. It was meant to change the
-    way you walk through your week.
+    way you move through your month.
 
 
 # ─── Teaching — the four cards ───────────────────────────────────────
 teaching:
   eyebrow: >-
-    What Chana Vered offers
+    Embodied Torah learning
 
   heading: >-
     Four ways to learn together
 
   intro: >-
-    Every format shares the same spine: real text, real inner work, and
-    something practical to carry home.
+    Every format shares the same spine: real text, real inner work, and a body
+    that learns alongside the mind — built to expand consciousness, not fill a
+    notebook.
 
   # To add another card, copy one whole block starting at "- title:".
   cards:
     - title: >-
-        Torah Classes
+        Inner Torah Classes
       text: >-
-        Weekly text-based learning — Chassidut, parsha and Jewish thought —
-        taught for depth and for daily life.
+        Weekly learning in the mystical dimension of Torah — Chassidut,
+        Kabbalah and parsha, taught for daily life.
 
     - title: >-
-        Meditation & Inner Work
+        Movement & Meditation
       text: >-
-        Guided Jewish meditation and breath practice for quieting the noise and
-        hearing yourself again.
+        Somatic practice, breath and guided Jewish meditation — quieting the
+        noise until you can hear yourself again.
 
     - title: >-
         Private Mentorship
       text: >-
-        One-to-one spiritual mentoring and energy healing for people navigating
-        a threshold season.
+        One-to-one mentoring through a threshold season — deep listening, full
+        presence, inner alignment and clarity.
 
     - title: >-
-        Retreats & Workshops
+        Circles & Retreats
       text: >-
-        Immersive days and weekends built around a single question worth
-        sitting with.
+        Women gathering at each new moon for the Hebrew month, and longer
+        retreats for heart-centered integration.
 
 
 # ─── Speaking ────────────────────────────────────────────────────────
@@ -159,36 +160,36 @@ speaking:
     Bring Chana Vered to your community
 
   intro: >-
-    Chana Vered speaks at shuls, schools, women's events, conferences and
-    corporate wellness days — in person and online. Talks are shaped around
-    your audience, not delivered from a shelf.
+    Chana Vered speaks at shuls, schools, women's gatherings, conferences and
+    organizations — in person and online. Every talk is shaped around your
+    audience, not delivered from a shelf.
 
   # The list of talks. The title shows in bold, the description after it.
   topics:
     - title: >-
-        Thriving in Uncertainty
+        Kabbalah of the Feminine
       text: >-
-        ancient tools for a rapidly changing reality
+        the hidden layer of Torah, in a woman's voice
 
     - title: >-
-        The Mind, the Soul and the Body
+        Circle Consciousness
       text: >-
-        where mental health meets Jewish wisdom
+        what changes when women learn in a circle instead of in rows
 
     - title: >-
         Coming Home to Yourself
       text: >-
-        meditation as a Jewish practice
+        awakening the inner wisdom you already carry
 
   # The big card on the right. Each line is shown on its own line.
   feature_line_1: >-
-    Coming
+    Kabbalah
   feature_line_2: >-
-    Home to
+    of the
   feature_line_3: >-
-    Yourself
+    Feminine
   feature_caption: >-
-    meditation as a Jewish practice
+    the mystical dimension of Torah
 
 
 # ─── Projects ────────────────────────────────────────────────────────
@@ -201,7 +202,8 @@ projects:
 
   intro: >-
     Alongside teaching and speaking, Chana Vered builds and helps lead places
-    where this wisdom keeps living — online and in the world.
+    where this wisdom keeps living — work meant to elevate and enlighten the
+    people who find it, online and in the world.
 
   # To add another project, copy a whole block starting at "- name:".
   # Every project needs all seven lines below — including logo. For the logo,
@@ -301,7 +303,7 @@ testimonials:
         “I came for a class and left with a practice. Chana Vered makes the
         deepest ideas feel usable.”
       author: >-
-        Student, weekly Torah class
+        Student, weekly Inner Torah class
 
     - quote: >-
         “Our community is still talking about her talk months later. Warm,
@@ -310,7 +312,7 @@ testimonials:
         Event organizer
 
     - quote: >-
-        “Mentoring with Chana Vered was the first time healing work and Torah
+        “Mentoring with Chana Vered was the first time my body and my learning
         felt like the same conversation.”
       author: >-
         Private mentorship client
@@ -325,8 +327,8 @@ contact:
     for your people.
 
   intro: >-
-    For speaking inquiries, class schedules, retreats or private mentorship —
-    send a note and Chana Vered will get back to you personally.
+    For a talk, a class, a circle, a retreat or private mentorship — send a
+    note and Chana Vered will get back to you personally.
 
   # Change this in one place and it updates everywhere on the site.
   email: >-
@@ -339,6 +341,6 @@ contact:
 # ─── The very bottom of the page ─────────────────────────────────────
 footer:
   line: >-
-    © 2026 · Torah educator, spiritual mentor & speaker
+    © 2026 · Kabbalah of the Feminine · teacher, mentor & speaker
   email_label: >-
     Email
