@@ -22,9 +22,7 @@ site:
     Chana Vered — Kabbalah of the Feminine, Inner Torah & Speaker
 
   description: >-
-    Chana Vered teaches the Kabbalah of the Feminine — the mystical dimension
-    of Torah — through embodied learning, somatic movement and Rosh Chodesh
-    circles.
+    Chana Vered is a Torah educator, speaker and spiritual guide dedicated to bringing the inner mystical dimension of Torah into daily life. Drawing from Chassidut and the turning of the Hebrew months, she shares practical wisdom to help spiritually seeking souls expand consciousness, heal and live with deep purpose and joy.
 
   # The short description used when someone shares the site on WhatsApp,
   # Facebook or X.
@@ -60,9 +58,8 @@ hero:
     awakened within.
 
   intro: >-
-    Chana Vered teaches the inner, mystical dimension of Torah — the Kabbalah
-    of the Feminine — not as information but as something you live: in your
-    body, in your week, in the turning of the Hebrew months.
+     Chana Vered is a Torah educator, speaker and spiritual guide dedicated to bringing the inner mystical dimension of Torah into daily life. Drawing from Chassidut and the turning of the Hebrew months, she shares practical wisdom to help spiritually seeking souls expand consciousness, heal and live with deep purpose and joy.
+
 
   button_primary: >-
     Invite Chana Vered to speak
@@ -76,24 +73,22 @@ about:
     About
 
   heading: >-
-    A teacher who begins with the woman in front of her.
+    A teacher who listens deeply to the person before her.
 
   paragraph_1: >-
     Chana Vered does not teach the inner Torah as a subject. She teaches it as
-    something to be inhabited — and that begins where life actually happens: in
+    something to be inhabited - that begins where life actually happens: in
     the body, in the breath, in the ordinary weeks that ask more of us than we
     thought we had.
 
   paragraph_2: >-
-    Her classes are embodied Torah learning: text alongside somatic movement,
-    meditation and deep listening, so that an idea is not only understood but
-    felt. Wisdom that stays in the head changes very little; wisdom that
-    reaches the body changes the week.
+    Her classes combine text study, meditation and energy work: ensuring that wisdom is not just understood, but also received directly into the vessel as actionable tools. Wisdom that stays in the mind changes very little; wisdom that
+    setlles into our daily life transforms everything. 
 
   paragraph_3: >-
     She teaches internationally, mentors privately, and speaks to communities,
     schools and organizations. Each Rosh Chodesh she gathers women in a circle —
-    learning the year through the Hebrew months, in alignment with the moon.
+    learning the year through the Hebrew months, in alignment with the flow of creation.
 
   # One phrase from each paragraph, copied exactly as it appears above. It blooms
   # large behind the paragraph as that part is read. Keep all three lines, even
@@ -103,7 +98,7 @@ about:
   paragraph_2_highlight: >-
     not only understood but felt
   paragraph_3_highlight: >-
-    in alignment with the moon
+    in alignment with the flow of creation
 
   # The quote in the coloured box.
   quote: >-
@@ -114,7 +109,7 @@ about:
 # ─── Teaching — the four cards ───────────────────────────────────────
 teaching:
   eyebrow: >-
-    Embodied Torah learning
+    Lived Torah learning
 
   heading: >-
     Four ways to learn together
@@ -127,28 +122,25 @@ teaching:
   # To add another card, copy one whole block starting at "- title:".
   cards:
     - title: >-
-        Inner Torah Classes
+        Rosh Chodesh Circles & Retreats
       text: >-
-        Weekly learning in the mystical dimension of Torah — Chassidut,
-        Kabbalah and parsha, taught for daily life.
-
-    - title: >-
-        Movement & Meditation
-      text: >-
-        Somatic practice, breath and guided Jewish meditation — quieting the
-        noise until you can hear yourself again.
-
-    - title: >-
-        Private Mentorship
-      text: >-
-        One-to-one mentoring through a threshold season — deep listening, full
-        presence, inner alignment and clarity.
-
-    - title: >-
-        Circles & Retreats
-      text: >-
-        Women gathering at each new moon for the Hebrew month, and longer
+        Monthly women's gatherings in circle consciousness  - aligning with calendar rhythms, Kabbalah of the Feminine, and seasonal renewal. As well as longer
         retreats for heart-centered integration.
+
+    - title: >-
+        Online Classes & Workshops
+      text: >-
+        Immersive learning bridging Chassidut, Kabbalah, meditation and energy work - offering practical tools to integrate new light into your vessel. 
+
+    - title: >-
+        Speaking & Facilitation
+      text: >-
+        Transformative keynotes and interactive workshops for communities and organisations - weaving psycho-spiritual Torah, meditation and movement.
+
+    - title: >-
+        Living Torah Community
+      text: >-
+        A vibrant digital space receiving weekly guidnce, practical spiritual tools and ongoing inspiration for daily healing, growth and transformation.
 
 
 # ─── Speaking ────────────────────────────────────────────────────────
@@ -174,7 +166,7 @@ speaking:
     - title: >-
         Circle Consciousness
       text: >-
-        what changes when women learn in a circle instead of in rows
+        what changes when women hold and share space together 
 
     - title: >-
         Coming Home to Yourself
@@ -216,7 +208,7 @@ projects:
       tagline: >-
         Geula: Revealing A Divine World
       heading: >-
-        A directory of universal Torah resources
+        A directory of universal, inner Torah resources
       description: >-
         Articles and videos gathered into one place you can search, filter and
         browse. Chana Vered is its creator.
@@ -236,7 +228,7 @@ projects:
       description: >-
         A thirty-two-year tradition of prayer, meditation and movement, kept by
         women in living rooms and on Zoom around the world. Chana Vered is
-        Project Coordinator and Lead Educator of its Moonlit Circle.
+        Project Coordinator and one of the Lead Educators of its Moonlit Circle.
       link: >-
         https://www.malkasima.com/purim-high-council
       link_label: >-
@@ -300,22 +292,22 @@ testimonials:
 
   quotes:
     - quote: >-
-        “I came for a class and left with a practice. Chana Vered makes the
-        deepest ideas feel usable.”
-      author: >-
+        “Learning with Chana Vered is more than just a lesson, it is a full body experience." 
         Student, weekly Inner Torah class
+    - quote: >-
+        “Chana Vered's warmth, wisdom, and ability to connect Torah to everyday life make learning with her a truly enriching experience."
+      author: >-
+        Student, Moonlit Circle Online Journey
 
     - quote: >-
-        “Our community is still talking about her talk months later. Warm,
-        sharp, and completely unpretentious.”
+        “Learning with Chana Vered is an inspirational joy! She brings unparalleled passion, knowledge, positivity, and humility to her teachings. Her Rosh Chodesh circles infuse each month with so much meaning, and help me to understand the world in new ways.”
       author: >-
-        Event organizer
+        Rosh Chodesh Circle Participant 
 
     - quote: >-
-        “Mentoring with Chana Vered was the first time my body and my learning
-        felt like the same conversation.”
+        “I never really felt connected to Purim in a spiritual way. So much focus was always on the external - costumes, gifts of food. Participating in the Purim High Council allowed me to tap into the incredible power of the day and infused Purim with so much meaning. I now look forward to it all year. Chana Vered was the perfect guide for this journey. ”
       author: >-
-        Private mentorship client
+        Purim High Council Particpant
 
 
 # ─── Get in touch (the dark section at the bottom) ───────────────────
@@ -327,7 +319,7 @@ contact:
     for your people.
 
   intro: >-
-    For a talk, a class, a circle, a retreat or private mentorship — send a
+    For a talk, a class, a circle or a retreat  — send a
     note and Chana Vered will get back to you personally.
 
   # Change this in one place and it updates everywhere on the site.
