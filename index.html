@@ -74,7 +74,12 @@
 html { scroll-behavior: smooth; }
 html.is-intro { overflow: hidden; }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+/* clip, never hidden: overflow-x:hidden computes overflow-y to auto, which makes body a scroll
+   container. WebKit then treats body as the sticky stages' scrolling ancestor and body never
+   scrolls, so no chapter pinned. clip protects against a stray full-bleed element the same way
+   without creating a scroll container. Verified on iPad/WebKit 26.4: body computes clip/visible
+   and every stage pins; and with it removed entirely the page overflows 0px at ten widths. */
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 ::selection { background: oklch(0.9 0.06 320); }
@@ -267,8 +272,22 @@ html.is-pinned .stage [data-item] { --drift: calc((.5 - var(--pm, .5)) * var(--k
 .chapter { position: relative; padding: 0; scroll-margin-top: 0; }
 .stage { position: relative; padding-block: clamp(80px, 10vw, 150px); }
 .pin-only { display: none; }
-html.is-pinned .chapter { min-height: calc(100svh + var(--steps, 3) * var(--step-h, 50vh)); }
-html.is-pinned .stage { position: sticky; top: min(0px, calc(100svh - 100%)); min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: 110px 0 60px; overflow: clip; overflow-anchor: none; }
+html { --step-h: 50vh; }
+/* A chapter that holds stands still for --hold of every step, and beat() compresses its closing
+   beats into the remaining (1 - --hold/2) — so its step is stretched by exactly 1/(1 - --hold/2),
+   which buys the pause without making the dusk and the signature any quicker. JS does that
+   division and publishes the result as --step-mul (1 where there is no hold). Keep this a flat
+   product: a calc() division nested inside it is the one construct here whose failure mode is
+   total — an engine that rejects it invalidates min-height, the track collapses to the stage
+   height, p snaps 0->1 in a pixel and About renders at --qd:1, which is opacity 0. */
+html.is-pinned .chapter { min-height: calc(100svh + var(--steps, 3) * var(--step-mul, 1) * var(--step-h, 50vh)); }
+/* top must be a plain 0. A percentage in a sticky inset is spec'd to resolve against the
+   scrollport, and Blink does that (making the old min(0px, calc(100svh - 100%)) exactly 0),
+   but WebKit resolves it against something document-scale: measured on an iPad Pro at a
+   1032x1290 viewport, the same rule computed top: -22820px on every chapter — a basis ~19x the
+   scrollport — so no stage ever pinned and the whole story scrolled past dead. (The exact basis
+   was inferred, not measured; the document ran ~23.9k px.) Never a percentage here. */
+html.is-pinned .stage { position: sticky; top: 0; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: 110px 0 60px; overflow: clip; overflow-anchor: none; }
 html.is-pinned .pin-only { display: block; }
 html.is-pinned .flow-only { display: none; }
 html.is-pinned .stage > .wrap { width: 100%; }
@@ -298,13 +317,17 @@ html.is-pinned .stage > .wrap:not(.about-pages) { position: relative; z-index: 1
 .bloom-wrap { margin-bottom: 14px; }
 .bloom { margin: 0; font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(22px, 3vw, 30px); line-height: 1.1; letter-spacing: -.01em; background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
 /* pinned: the stage is two bands — the statement above, the reading window below — so the
-   heading's flight can never cross a paragraph. Both run off one clock, --sxr (the per-step
-   smoothstep --pr in step units): the heading reaches its corner slot in the first third of
-   step 1 (--hq), and only then does the strip start sliding paragraph 1 in from the right.
-   Because both read the same clock they stay in step scrolling up as well as down. */
-html.is-pinned .about .stage { --sxr: calc(var(--pr, 0) * var(--steps, 6)); }
+   heading's flight can never cross a paragraph. Two clocks, both off raw scroll (data-hold puts
+   this chapter on the read tier): the heading reads --sxr, the plain per-step smoothstep in step
+   units — it leaves two thirds of the way through step 0 and lands a third of the way into step 1
+   (--hq) — and the strip reads --sxh, the held clock, which parks a paragraph dead-centre across
+   each step boundary and does not start sliding paragraph 1 in until 0.12 of a step after the
+   heading has landed. What guarantees they never cross is not that margin but that both are
+   monotone functions of the one scalar: two such can never swap order, at any scroll speed, in
+   either direction. Split them across tiers and the lag would invert them above ~875px/s. */
+html.is-pinned .about .stage { --sxr: calc(var(--pr, 0) * var(--steps, 6)); --sxh: calc(var(--prh, var(--pr, 0)) * var(--steps, 6)); }
 html.is-pinned .about-pages { flex: 1 1 auto; display: grid; grid-template-rows: 38% 1fr; align-items: center; }
-html.is-pinned .about-head { --hq: clamp(0, calc((var(--sxr) - 1) * 3), 1); }
+html.is-pinned .about-head { --hq: clamp(0, calc((var(--sxr) - .7) * 1.8), 1); }
 html.is-pinned .about-head .eyebrow { opacity: calc(1 - var(--hq, 0)); }
 html.is-pinned .about-head { position: absolute; top: 110px; left: max(var(--gutter), calc((100% - var(--wrap)) / 2)); width: min(62vw, calc(13 * clamp(40px, 5vw, 76px))); transform-origin: top left; transform: translate3d(calc(var(--cx, 0px) * (1 - var(--hq, 0))), calc(var(--cy, 0px) * (1 - var(--hq, 0)) + (.5 - var(--pm, .5)) * 6px), 0) scale(calc(1 - .58 * var(--hq, 0))); }
 html.is-pinned .about-body { grid-row: 2; margin: 0; width: 100%; max-width: none; font-size: clamp(24px, 3vw, 44px); }
@@ -312,7 +335,7 @@ html.is-pinned .about-body { grid-row: 2; margin: 0; width: 100%; max-width: non
    wide (an empty one to open on) and moves exactly one slot per paragraph */
 html.is-pinned .about-window { width: 100vw; margin-inline: calc(50% - 50vw); overflow-x: clip; overflow-y: visible; }
 html.is-pinned .page { padding-inline: max(var(--gutter), calc((100vw - var(--wrap)) / 2)); pointer-events: none; }
-html.is-pinned .about-strip { display: grid; grid-auto-flow: column; grid-auto-columns: 100%; --sx: clamp(0, min(calc((var(--sxr) - 1.355) * 1.55), calc(var(--sxr) - 1)), 3); transform: translate3d(calc(var(--sx) * -100%), 0, 0); }
+html.is-pinned .about-strip { display: grid; grid-auto-flow: column; grid-auto-columns: 100%; --sx: clamp(0, min(calc((var(--sxh) - 1.355) * 1.55), calc(var(--sxh) - 1)), 3); transform: translate3d(calc(var(--sx) * -100%), 0, 0); }
 html.is-pinned .page[data-item] { opacity: calc(1 - .55 * var(--qnext, 0)); --rise: calc(var(--qnext, 0) * -28px); }
 html.is-pinned .page-text { font-size: 1em; line-height: 1.32; text-align: center; max-width: 20em; margin: 0 auto; }
 html.is-pinned .bloom-wrap { position: absolute; right: max(var(--gutter), calc((100vw - var(--wrap)) / 2)); top: calc(100% + 12px); bottom: auto; margin: 0; width: 11em; font-size: clamp(34px, 4.4vw, 64px); --fq: clamp(0, calc(var(--q, 1) * var(--m, 1) - var(--jh, 0)), 1); opacity: calc(.2 * var(--fq)); transform: translate3d(calc((.5 - var(--pw, .5)) * 60px), calc((.5 - var(--pw, .5)) * -40px), 0) scale(calc(.96 + .04 * var(--fq))); pointer-events: none; z-index: 0; text-align: right; }
@@ -411,7 +434,7 @@ html.is-pinned .topic { padding: clamp(16px, 2.4vh, 26px) 0; }
 /* Night rises from the bottom of the stage with a soft edge (transform only), fully up at 60%
    of the dusk beat — exactly when the horizon begins to draw along its top. */
 html.is-pinned .voices .eyebrow { position: absolute; top: 110px; left: max(var(--gutter), calc((100% - var(--wrap)) / 2)); margin: 0; z-index: 2; }
-html.is-pinned .stage-quotes { display: grid; grid-auto-rows: var(--slot); height: var(--slot); --slot: min(32svh, 300px); --rq: clamp(0, calc(var(--pr, 0) * var(--steps, 5) - 1), 2); align-items: center; justify-items: center; gap: 0; transform: translate3d(0, calc(var(--rq) * -1 * var(--slot) + (.5 - var(--pm, .5)) * 12px * (1 - var(--qd, 0))), 0); }
+html.is-pinned .stage-quotes { display: grid; grid-auto-rows: var(--slot); height: var(--slot); --slot: min(32svh, 300px); --rq: clamp(0, calc(var(--prh, var(--pr, 0)) * var(--steps, 5) - 1), 2); align-items: center; justify-items: center; gap: 0; transform: translate3d(0, calc(var(--rq) * -1 * var(--slot) + (.5 - var(--pm, .5)) * 12px * (1 - var(--qd, 0))), 0); }
 html.is-pinned .quote { max-width: 22em; margin: 0; text-align: center; }
 html.is-pinned .quote:nth-child(2), html.is-pinned .quote:nth-child(3) { margin: 0; text-align: center; }
 html.is-pinned .quote[data-item] { opacity: calc((1 - .8 * var(--qnext, 0)) * (1 - min(var(--qd, 0) * 1.67, 1))); transform: translate3d(0, calc(min(var(--qd, 0) * 1.67, 1) * -12px), 0) scale(calc(1 - .08 * var(--qnext, 0))); transform-origin: center; }
@@ -699,7 +722,7 @@ html.is-compact .night .lede { margin: 16px auto 28px; }
 
   <div class="breath"></div>
 
-  <section id="about" class="chapter about" data-pin data-extend="2">
+  <section id="about" class="chapter about" data-pin data-extend="2" data-hold=".55">
     <div class="stage">
       <div class="wrap about-pages">
         <div class="about-head reveal reveal-fade" data-item="0" data-panel>
@@ -818,7 +841,7 @@ html.is-compact .night .lede { margin: 16px auto 28px; }
     </div>
   </section>
 
-  <section id="voices" class="chapter voices" data-pin data-extend="2" aria-labelledby="voices-label">
+  <section id="voices" class="chapter voices" data-pin data-extend="2" data-hold=".55" aria-labelledby="voices-label">
     <div class="stage">
       <div class="chapter-word" aria-hidden="true" style="--cw: {{ site.data.content.testimonials.eyebrow | size }}">{{ site.data.content.testimonials.eyebrow | escape }}</div>
       <div class="wrap">
@@ -1004,7 +1027,7 @@ html.is-compact .night .lede { margin: 16px auto 28px; }
   const TAU = { read: 0, mid: (fine ? 0.09 : 0.07), wash: (fine ? 0.18 : 0.14) };
   const chapters = $$('[data-pin]').map((track) => ({
     track, stage: $('.stage', track), items: [], top: 0, range: 1, n: 1, steps: 1,
-    extend: +(track.dataset.extend || 0), rec: {}, p: 0, pm: 0, pw: 0,
+    extend: +(track.dataset.extend || 0), hold: clamp(+track.dataset.hold || 0, 0, .9), rec: {}, p: 0, pm: 0, pw: 0,
   }));
   const voices = chapters.find((c) => c.track.id === 'voices');
   const thread = $('.thread');
@@ -1049,6 +1072,7 @@ html.is-compact .night .lede { margin: 16px auto 28px; }
       c.n = Math.max(1, auto);
       c.steps = c.n + c.extend;
       c.track.style.setProperty('--steps', c.steps);
+      c.track.style.setProperty('--step-mul', (1 / (1 - c.hold / 2)).toFixed(6));
     });
     const inChapter = (el) => chapters.some((c) => c.track.contains(el));
     flowItems = $$('[data-item]')
@@ -1073,7 +1097,7 @@ html.is-compact .night .lede { margin: 16px auto 28px; }
     flowItems.forEach((f) => { f.top = offsetTop(f.el); f.h = f.el.offsetHeight; });
     // the thread runs from the cue to where night begins
     threadTop = heroH - 26;
-    const nightStart = (pinned && voices) ? voices.top + voices.range * (voices.n / voices.steps) : offsetTop(night);
+    const nightStart = (pinned && voices) ? voices.top + voices.range * ((voices.n + voices.hold / 2) / voices.steps) : offsetTop(night);
     threadH = Math.max(1, nightStart - threadTop);
     thread.style.top = `${threadTop}px`;
     thread.style.height = `${threadH}px`;
@@ -1144,12 +1168,25 @@ html.is-compact .night .lede { margin: 16px auto 28px; }
       setVar(c.rec, c.stage, '--p', p);
       setVar(c.rec, c.stage, '--pm', pm);
       setVar(c.rec, c.stage, '--pw', pw);
-      // the card row decelerates as each card arrives: p remapped through a smoothstep per step
-      const st = Math.min(c.steps - 1, Math.floor(pm * c.steps));
-      setVar(c.rec, c.stage, '--pr', (st + smooth(clamp(pm * c.steps - st, 0, 1))) / c.steps);
+      // the card row decelerates as each card arrives: p remapped through a smoothstep per step.
+      // A chapter that holds reads raw scroll instead: the panel it parks is the thing being read,
+      // so it belongs on the read tier. On --pm the 90ms lag runs the travel behind the crossfade,
+      // which is exact — and a panel then starts dimming a third of the way into its pause.
+      const src = c.hold ? p : pm;
+      const st = Math.min(c.steps - 1, Math.floor(src * c.steps));
+      const f = clamp(src * c.steps - st, 0, 1);
+      setVar(c.rec, c.stage, '--pr', (st + smooth(f)) / c.steps);
+      // a chapter that holds slides only across the middle of its step, so a panel's travel is
+      // parked for c.hold of a step, half before the boundary it lands on and half after. Only
+      // the travel: the shared --drift channel still breathes a staged item ~1.3px over that
+      // pause (14px across the whole chapter, off --pm), so "parked" means the strip, not the
+      // page. Gate --drift on the hold too if that ever reads as motion rather than breath.
+      if (c.hold) setVar(c.rec, c.stage, '--prh', (st + smooth(clamp((f - c.hold / 2) / (1 - c.hold), 0, 1))) / c.steps);
       c.items.forEach((it) => {
-        // item 0 is fully on the instant the chapter pins; each later item owns one step
-        it.q = it.k === 0 ? 1 : clamp((p - it.k / c.steps) / (0.6 / c.steps), 0, 1);
+        // item 0 is fully on the instant the chapter pins; each later item owns one step. Where
+        // the chapter holds, the ink runs over the travel window, so the outgoing panel's --qnext
+        // is still 0 for the whole of its dwell and it never dims while it is standing still.
+        it.q = it.k === 0 ? 1 : clamp((p * c.steps - it.k - c.hold / 2) / (0.6 * (1 - c.hold)), 0, 1);
         setVar(it.rec, it.el, '--q', it.q);
       });
       // panels take turns: each one knows how far the next has arrived (voices settle back,
@@ -1159,8 +1196,11 @@ html.is-compact .night .lede { margin: 16px auto 28px; }
         const nx = c.items.find((o) => o.k === it.k + 1 && o.el.hasAttribute('data-panel'));
         setVar(it.rec, it.el, '--qnext', nx ? nx.q : 0);
       });
-      // beats after the items: dusk (--qd, read tier; --qw, wash tier) and the name (--qn)
-      const beat = (v, i) => (c.extend > i ? clamp((v - (c.n + i) / c.steps) * c.steps, 0, 1) : 1);
+      // beats after the items: dusk (--qd, read tier; --qw, wash tier) and the name (--qn). They
+      // wait out the last panel's dwell too, or it would be wiped away the moment it arrived. The
+      // offset is c.hold/2 but the denominator (1 - c.hold/2): the ramp still ends on the step
+      // boundary, so (c.n + 1) / c.steps is still exactly where the night stands complete.
+      const beat = (v, i) => (c.extend > i ? clamp((v * c.steps - (c.n + i) - c.hold / 2) / (1 - c.hold / 2), 0, 1) : 1);
       setVar(c.rec, c.stage, '--qd', beat(p, 0));
       setVar(c.rec, c.stage, '--qw', beat(pw, 0));
       setVar(c.rec, c.stage, '--qn', beat(p, 1));
@@ -1247,7 +1287,7 @@ html.is-compact .night .lede { margin: 16px auto 28px; }
     html.classList.toggle('is-pinned', pinned);
     html.classList.toggle('is-compact', pinned && pinSmMQ.matches);
     chapters.forEach((c) => {
-      ['--p', '--pm', '--pw', '--pr', '--qd', '--qw', '--qn'].forEach((v) => c.stage.style.removeProperty(v));
+      ['--p', '--pm', '--pw', '--pr', '--prh', '--qd', '--qw', '--qn'].forEach((v) => c.stage.style.removeProperty(v));
       c.items.forEach((it) => { it.el.style.removeProperty('--q'); it.el.style.removeProperty('--qnext'); });
       c.rec = {};
     });

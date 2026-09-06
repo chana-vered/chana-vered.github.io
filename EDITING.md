@@ -28,7 +28,7 @@ Each piece of text looks like this:
 
 ```yaml
   heading: >-
-    A teacher who begins with the human being in front of her.
+    A teacher who begins with the woman in front of her.
 ```
 
 **Rule 1 — don't touch the top line.** `heading: >-` is the label that tells the
@@ -45,9 +45,9 @@ one paragraph on the website, so you can break lines wherever it's comfortable:
 
 ```yaml
   intro: >-
-    Chana Vered speaks at shuls, schools, women's events and conferences —
-    in person and online. Talks are shaped around your audience,
-    not delivered from a shelf.
+    Chana Vered speaks at shuls, schools, women's gatherings, conferences
+    and organizations — in person and online. Every talk is shaped around
+    your audience, not delivered from a shelf.
 ```
 
 ---
