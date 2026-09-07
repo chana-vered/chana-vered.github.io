@@ -71,7 +71,18 @@
 @keyframes wipe { to { transform: translateX(0); } }
 
 /* ───────────────────────────── 2. base + type ───────────────────────────── */
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+/* stable, because the intro locks the page with overflow: hidden below. On a Mac with classic
+   scrollbars (any visitor with a mouse) that takes the scrollbar away for the length of the
+   intro and hands it back at the end, and the whole page jumps sideways by its width the
+   instant the signature lands - measured at 17px in Safari, 13px in Chrome. Reserving the
+   gutter costs nothing to overlay-scrollbar users (the property only applies to classic ones)
+   and nothing to the layout, since the page always scrolls. It also keeps the intro's FLIP
+   honest: it measures getBoundingClientRect() while is-intro is still on, so without this the
+   target it flies to is half a scrollbar off. And splitLines() measures line breaks once, on
+   fonts.ready, which resolves DURING the intro - the resize handler that would re-split is
+   gated on innerWidth, which does not change when a scrollbar appears, so a split made at the
+   wider width was never corrected. */
 html.is-intro { overflow: hidden; }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: clip; }
@@ -361,8 +372,18 @@ html.is-pinned .about-pages { opacity: calc(1 - min(var(--qd, 0) * 2, 1)); }
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
 /* the rail is wider than its window, so it travels: cqw is the window, 100% the rail itself */
 html.is-pinned .cards-window { container-type: inline-size; }
-html.is-pinned .cards { display: flex; width: max-content; gap: clamp(20px, 2vw, 28px); transform: translate3d(calc(var(--pr, 0) * (100cqw - 100%)), 0, 0); }
-html.is-pinned .card { flex: 0 0 clamp(280px, 27vw, 380px); display: flex; flex-direction: column; min-height: min(46svh, 430px); scale: calc(1 + .035 * (var(--q, 1) - var(--qnext, 0))); }
+/* The rail's width must be STATED, never max-content. The travel is pr * (100cqw - 100%), so
+   100% is the rail, and the two engines do not agree on what max-content means here: the cards
+   are flex: 0 0 <basis> with no stated width, and Blink sizes the container from that definite
+   basis (4 x 380 + 3 x 28 = 1604) while WebKit sums the items' content-based contributions -
+   the unwrapped card text - and measured 3310 at 1550x1208. The rail then travelled
+   pr * (1180 - 3310) = -2130 instead of -424, five times too far, and by the end of the chapter
+   all four cards had left the window: Teaching went blank in Safari. min-width: 0 and
+   overflow: hidden on the card do not change it; only stating the width does (verified against
+   both engines: 1604 either way). So --cardw/--cardgap drive the basis AND the width, the way
+   the compact rail below already does, and --n is the card count from content.yml via Liquid. */
+html.is-pinned .cards { --cardw: clamp(280px, 27vw, 380px); --cardgap: clamp(20px, 2vw, 28px); display: flex; gap: var(--cardgap); width: calc(var(--n, 4) * var(--cardw) + (var(--n, 4) - 1) * var(--cardgap)); transform: translate3d(calc(var(--pr, 0) * (100cqw - 100%)), 0, 0); }
+html.is-pinned .card { flex: 0 0 var(--cardw); display: flex; flex-direction: column; min-height: min(46svh, 430px); scale: calc(1 + .035 * (var(--q, 1) - var(--qnext, 0))); }
 html.is-pinned .card h3 { margin-top: auto; }
 .card { --k: 30px; position: relative; padding: 34px 30px 36px; border-radius: 22px; border: 1px solid transparent; background: linear-gradient(#fff, #fff) padding-box, linear-gradient(120deg, var(--hair), var(--hair)) border-box; transition: translate .5s var(--ease), box-shadow .5s var(--ease), background .4s ease; clip-path: inset(calc((1 - var(--q, 1)) * 100%) 0 0 0 round 22px); }
 .card::before { content: ""; position: absolute; left: 0; top: 28px; bottom: 28px; width: 1px; background: var(--grad); transform: scaleY(var(--q, 1)); transform-origin: top; }
@@ -465,6 +486,7 @@ html.is-pinned .night::before { content: ""; position: absolute; left: 0; right:
 /* footer */
 .footer { padding: 40px var(--gutter) 52px; background: var(--night); color: rgba(246, 242, 248, .55); border-top: 1px solid rgba(246, 242, 248, .1); }
 .footer .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; font-size: 13px; padding: 0; }
+.footer-mark { display: block; line-height: 0; }  /* line-height:0 as on .brand: an inline img adds a descender gap that would offset the centred flex row */
 .footer img { height: 44px; width: auto; padding: 9px 16px; border-radius: 14px; background: var(--paper); }
 .footer nav { display: flex; gap: 22px; }
 .footer nav a { padding: 8px 0; transition: color .3s ease; }
@@ -776,7 +798,7 @@ html.is-compact .night .lede { margin: 16px auto 28px; }
           <p class="reveal" style="--delay: 120ms" data-follow>{{ site.data.content.teaching.intro | escape }}</p>
         </div>
         <div class="cards-window">
-        <div class="cards" data-cascade>
+        <div class="cards" data-cascade style="--n: {{ site.data.content.teaching.cards | size }}">
           {%- for card in site.data.content.teaching.cards %}
           <article class="card" data-item data-panel>
             <div class="icon i{{ forloop.index }}" aria-hidden="true"></div>
@@ -885,7 +907,9 @@ html.is-compact .night .lede { margin: 16px auto 28px; }
 
 <footer class="footer">
   <div class="wrap">
-    <img src="assets/logo.png" alt="Chana Vered" width="1600" height="484" />
+    <a class="footer-mark" href="#top" aria-label="Chana Vered — back to top">
+      <img src="assets/logo.png" alt="" width="1600" height="484" />
+    </a>
     <p>{{ site.data.content.footer.line | escape }}</p>
     <nav aria-label="Footer">
       <a href="#about">{{ site.data.content.nav.about | escape }}</a>
@@ -1830,7 +1854,11 @@ void main() {
         const dt = t - last; last = t; frames++;
         if (frames > 1 && dt > 16.7) slow.push(Math.round(dt));
         const p = Math.min(1, (t - t0) / 4000);
-        scrollTo(0, max * p);
+        // behavior: 'instant' is load-bearing, not tidiness. The two-argument scrollTo obeys
+        // html { scroll-behavior: smooth } (:74), so in Blink every call started a fresh smooth
+        // animation that the next frame re-targeted: the sweep crawled ~900px of a 21000px page
+        // and reported a flawless 500 frames of an almost static hero. Measured on 2026-09-06.
+        scrollTo({ top: max * p, behavior: 'instant' });
         if (p < 1) requestAnimationFrame(step);
         else {
           const pre = document.createElement('pre');
